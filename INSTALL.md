@@ -46,7 +46,7 @@ Claude Codeがインストールされていない場合は、[公式ドキュ�
 cd path\to\your\project
 
 # インストールスクリプトをダウンロード
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/your-repo/smart-review-system/main/install.ps1" -OutFile "install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/KEIEI-NET/smart-review-Skills_Version/main/install.ps1" -OutFile "install.ps1"
 
 # スクリプトを実行
 .\install.ps1
@@ -68,7 +68,7 @@ install.bat
 cd /path/to/your/project
 
 # インストールスクリプトをダウンロード
-curl -O https://raw.githubusercontent.com/your-repo/smart-review-system/main/install.sh
+curl -O https://raw.githubusercontent.com/KEIEI-NET/smart-review-Skills_Version/main/install.sh
 
 # 実行権限を付与
 chmod +x install.sh
@@ -85,13 +85,13 @@ chmod +x install.sh
 
 **オプションA: ZIPファイルをダウンロード**
 
-1. [リリースページ](https://github.com/your-repo/smart-review-system/releases)から最新版をダウンロード
+1. [リリースページ](https://github.com/KEIEI-NET/smart-review-Skills_Version/releases)から最新版をダウンロード
 2. ZIPファイルを解凍
 
 **オプションB: Gitでクローン**
 
 ```bash
-git clone https://github.com/your-repo/smart-review-system.git
+git clone https://github.com/KEIEI-NET/smart-review-Skills_Version.git
 cd smart-review-system
 ```
 
@@ -153,7 +153,7 @@ cd /path/to/your/project
 mkdir -p .claude/skills
 
 # サブモジュールとして追加
-git submodule add https://github.com/your-repo/smart-review-system.git .claude/skills/smart-review
+git submodule add https://github.com/KEIEI-NET/smart-review-Skills_Version.git .claude/skills/smart-review
 
 # サブモジュールを初期化
 git submodule update --init --recursive
@@ -430,7 +430,7 @@ git push
 cat > setup.sh << 'EOF'
 #!/bin/bash
 echo "Installing Smart Review Skills..."
-curl -o install.sh https://raw.githubusercontent.com/your-repo/smart-review-system/main/install.sh
+curl -o install.sh https://raw.githubusercontent.com/KEIEI-NET/smart-review-Skills_Version/main/install.sh
 chmod +x install.sh
 ./install.sh
 rm install.sh
@@ -486,7 +486,7 @@ nano .claude/skills/smart-review-debug/checklist.md
 
 問題が解決しない場合：
 
-1. [Issues](https://github.com/your-repo/smart-review-system/issues)で既存の問題を検索
+1. [Issues](https://github.com/KEIEI-NET/smart-review-Skills_Version/issues)で既存の問題を検索
 2. 新しいIssueを作成（以下の情報を含める）:
    - OS とバージョン
    - Claude Code のバージョン
@@ -511,7 +511,7 @@ cat .claude/skills/smart-review-security/SKILL.md | head -n 20
 
 ```bash
 # Gitタグを指定してインストール
-git clone --branch v1.0.0 https://github.com/your-repo/smart-review-system.git
+git clone --branch v1.0.0 https://github.com/KEIEI-NET/smart-review-Skills_Version.git
 ```
 
 ---

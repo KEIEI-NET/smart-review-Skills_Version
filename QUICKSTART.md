@@ -11,7 +11,7 @@
 cd your-project-directory
 
 # スクリプトをダウンロード
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/your-repo/smart-review-system/main/install.ps1" -OutFile "install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/KEIEI-NET/smart-review-Skills_Version/main/install.ps1" -OutFile "install.ps1"
 
 # インストール実行
 .\install.ps1
@@ -23,7 +23,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/your-repo/smart-review
 cd /path/to/your/project
 
 # スクリプトをダウンロード
-curl -O https://raw.githubusercontent.com/your-repo/smart-review-system/main/install.sh
+curl -O https://raw.githubusercontent.com/KEIEI-NET/smart-review-Skills_Version/main/install.sh
 
 # 実行権限を付与
 chmod +x install.sh

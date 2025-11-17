@@ -225,7 +225,7 @@ MIT License
 
 ## 📞 サポート
 
-- Issues: [GitHub Issues](https://github.com/your-repo/smart-review-system/issues)
+- Issues: [GitHub Issues](https://github.com/KEIEI-NET/smart-review-Skills_Version/issues)
 - ドキュメント: [docs/](./docs/)
 
 ---

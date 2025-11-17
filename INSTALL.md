@@ -516,5 +516,7 @@ git clone --branch v1.0.0 https://github.com/KEIEI-NET/smart-review-Skills_Versi
 
 ---
 
-**最終更新**: 2025年11月17日
-**対象バージョン**: Smart Review System v1.0.0
+**最終更新:** 2025年11月17日 13:30 JST
+**対象バージョン:** Smart Review System v1.1.0
+**著作権:** (c) 2025 KEIEI.NET INC.
+**作成者:** KENJI OYAMA

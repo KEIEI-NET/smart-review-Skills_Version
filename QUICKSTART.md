@@ -294,3 +294,9 @@ rm -rf .claude/skills/smart-review-*
 claude
 > このプロジェクトのセキュリティ分析をお願いします
 ```
+
+---
+
+**最終更新:** 2025年11月17日 13:30 JST
+**著作権:** (c) 2025 KEIEI.NET INC.
+**作成者:** KENJI OYAMA

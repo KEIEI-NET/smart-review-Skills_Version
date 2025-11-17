@@ -213,3 +213,9 @@ claude
 
 **フォーマット:** [Keep a Changelog](https://keepachangelog.com/)
 **バージョニング:** [Semantic Versioning](https://semver.org/)
+
+---
+
+**最終更新:** 2025年11月17日 13:30 JST
+**著作権:** (c) 2025 KEIEI.NET INC.
+**作成者:** KENJI OYAMA

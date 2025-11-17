@@ -531,3 +531,9 @@ async function transformAndSave(data, options = {}) {
 ---
 
 **注意:** ドキュメントは生きたドキュメントであるべきです。コードと同時に更新し、常に最新の状態を保ってください。
+
+---
+
+**最終更新:** 2025年11月17日 13:30 JST
+**著作権:** (c) 2025 KEIEI.NET INC.
+**作成者:** KENJI OYAMA

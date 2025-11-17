@@ -374,7 +374,9 @@ git commit -m "chore: Update BugSearch3 rules"
 
 [MIT License](LICENSE)
 
-Copyright (c) 2025 KEIEI-NET
+Copyright (c) 2025 KEIEI.NET INC.
+
+**Author:** KENJI OYAMA
 
 ## 🙏 謝辞
 
@@ -431,3 +433,9 @@ chmod +x install.sh
 claude
 > このプロジェクトをレビューしてください
 ```
+
+---
+
+**最終更新:** 2025年11月17日 13:30 JST
+**著作権:** (c) 2025 KEIEI.NET INC.
+**作成者:** KENJI OYAMA

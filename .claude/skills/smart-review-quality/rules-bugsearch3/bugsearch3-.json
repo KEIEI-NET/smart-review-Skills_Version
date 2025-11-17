@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "*",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "^\\s*(global\\s+\\w+|extern\\s+\\w+|public\\s+static\\s+\\w+.*=|var\\s+\\w+\\s*=.*//\\s*global|\\$GLOBALS\\[)",
+      "description": "グローバル変数の使用を検出（全言語共通）",
+      "severity": "medium",
+      "recommendation": "依存性注入、クラスのインスタンス変数、または適切なスコープ管理を使用してください",
+      "metadata": {
+        "id": "QUAL008",
+        "name": "Global Variable Usage",
+        "language": "*",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual008_global_variable_usage.yaml"
+      },
+      "message": "Global Variable Usage: グローバル変数の使用は保守性とテストの困難さを増大させます"
+    }
+  ]
+}

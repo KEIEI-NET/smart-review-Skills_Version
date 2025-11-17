@@ -1,0 +1,38 @@
+{
+  "source": "BugSearch3",
+  "language": "cpp",
+  "category": "security",
+  "rules_count": 2,
+  "rules": [
+    {
+      "pattern": "(strcpy|strcat|gets|sprintf|vsprintf)\\s*\\(",
+      "description": "バッファオーバーフローのリスクがある危険な関数の使用",
+      "severity": "critical",
+      "recommendation": "strcpy_s, strcat_s, fgets, snprintf などの安全な関数を使用してください",
+      "metadata": {
+        "id": "SEC014",
+        "name": "Buffer Overflow Risk (C/C++)",
+        "language": "cpp",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec014_buffer_overflow_cpp.yaml"
+      },
+      "message": "Buffer Overflow Risk: strcpy, strcat, gets などの危険な関数の使用を検出しました"
+    },
+    {
+      "pattern": "(int|float|double|char|long|short)\\s+\\w+\\s*;",
+      "description": "初期化されていない変数の使用",
+      "severity": "high",
+      "recommendation": "変数を宣言時に初期化してください（例: int x = 0;）",
+      "metadata": {
+        "id": "SEC016",
+        "name": "Uninitialized Variable (C/C++)",
+        "language": "cpp",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec016_cpp_uninitialized_variable.yaml"
+      },
+      "message": "Uninitialized Variable: 初期化されていない変数は不定値を持ち、予期しない動作の原因となります"
+    }
+  ]
+}

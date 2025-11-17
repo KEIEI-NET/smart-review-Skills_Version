@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "[\"python\", \"javascript\", \"typescript\", \"java\", \"csharp\"]",
+  "category": "security",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "(api[_-]?key|api[_-]?secret|access[_-]?token|secret[_-]?key|private[_-]?key)\\s*=\\s*[''\"][A-Za-z0-9_\\-]{16,}[''\"]",
+      "description": "Detects hardcoded API keys, secrets, or tokens in source code",
+      "severity": "critical",
+      "recommendation": "Use environment variables or secure credential management. Example: api_key = os.getenv('API_KEY') or use AWS Secrets Manager, Azure Key Vault, etc.",
+      "metadata": {
+        "id": "SEC004",
+        "name": "Hardcoded API Key",
+        "language": "[\"python\", \"javascript\", \"typescript\", \"java\", \"csharp\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "hardcoded_api_key.yaml"
+      },
+      "message": "Hardcoded API keys or secrets in source code can be exposed in version control"
+    },
+    {
+      "pattern": "(password|passwd|pwd)\\s*=\\s*[''\"][^''\"]{3,}[''\"]",
+      "description": "Detects hardcoded passwords in source code",
+      "severity": "critical",
+      "recommendation": "Use environment variables, configuration files (not in version control), or secure credential management services. Example: password = os.getenv('DB_PASSWORD')",
+      "metadata": {
+        "id": "SEC003",
+        "name": "Hardcoded Password",
+        "language": "[\"python\", \"javascript\", \"typescript\", \"java\", \"csharp\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "hardcoded_password.yaml"
+      },
+      "message": "Hardcoded passwords in source code pose a serious security risk"
+    },
+    {
+      "pattern": "\\b(md5|sha1|MD5|SHA1|DES|RC4)\\s*\\(|hashlib\\.(md5|sha1)\\(|crypto\\.createHash\\s*\\(\\s*[''](md5|sha1)['']",
+      "description": "Detects use of weak or broken cryptographic algorithms like MD5, SHA1",
+      "severity": "high",
+      "recommendation": "Use modern cryptographic algorithms: SHA-256, SHA-3, or bcrypt for passwords. Example: hashlib.sha256() or bcrypt.hashpw()",
+      "metadata": {
+        "id": "SEC005",
+        "name": "Weak Cryptography",
+        "language": "[\"python\", \"javascript\", \"typescript\", \"java\", \"csharp\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "weak_cryptography.yaml"
+      },
+      "message": "Use of weak cryptographic algorithms (MD5, SHA1, DES, RC4) is insecure"
+    }
+  ]
+}

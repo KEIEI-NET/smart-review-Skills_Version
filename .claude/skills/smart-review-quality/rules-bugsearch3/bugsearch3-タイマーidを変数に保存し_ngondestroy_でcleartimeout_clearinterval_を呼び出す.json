@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "タイマーIDを変数に保存し、ngOnDestroy()でclearTimeout()/clearInterval()を呼び出す",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(setTimeout|setInterval)\\s*\\(",
+      "description": "setTimeout()やsetInterval()で作成されたタイマーが適切にクリアされていません。コンポーネント破棄時にメモリリークや予期しない動作が発生します。",
+      "severity": "medium",
+      "recommendation": "|",
+      "metadata": {
+        "id": "PERF022",
+        "name": "Angular Timer Memory Leak",
+        "language": "タイマーIDを変数に保存し、ngOnDestroy()でclearTimeout()/clearInterval()を呼び出す",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf022_angular_timer_leak.yaml"
+      },
+      "message": "Angular Timer Memory Leak: setTimeout()/setInterval()で作成されたタイマーがクリアされていません。ngOnDestroy()でclearTimeout()/clearInterval()を呼び出してください。"
+    }
+  ]
+}

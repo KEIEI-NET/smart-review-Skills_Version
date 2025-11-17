@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "swift",
+  "category": "quality",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "\\{\\s*\\n?\\s*self\\.|closure[\\s\\S]*self\\.",
+      "description": "クロージャ内でselfを強参照することによる循環参照のリスク",
+      "severity": "high",
+      "recommendation": "[weak self] または [unowned self] を使用してキャプチャリストを定義してください",
+      "metadata": {
+        "id": "PERF009",
+        "name": "Retain Cycle Risk (Swift)",
+        "language": "swift",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf009_swift_retain_cycle.yaml"
+      },
+      "message": "Retain Cycle Risk: クロージャ内でselfを強参照すると循環参照によるメモリリークが発生します"
+    },
+    {
+      "pattern": "DispatchQueue\\.main\\.(sync|async)\\s*\\{[^}]*(for\\s+.*in|while|\\.wait\\(|sleep\\(|Thread\\.sleep)",
+      "description": "メインスレッドで重い処理を実行している可能性",
+      "severity": "high",
+      "recommendation": "DispatchQueue.global() または async/await を使用してバックグラウンドスレッドで実行してください",
+      "metadata": {
+        "id": "PERF010",
+        "name": "Main Thread Blocking (Swift)",
+        "language": "swift",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf010_swift_main_thread_blocking.yaml"
+      },
+      "message": "Main Thread Blocking: メインスレッドで重い処理を実行するとUIがフリーズします"
+    },
+    {
+      "pattern": "(class|struct|enum)\\s+[a-z]|func\\s+[A-Z]|var\\s+[A-Z]|let\\s+[A-Z]",
+      "description": "Swift命名規則違反（クラス/構造体はUpperCamelCase、変数/関数はlowerCamelCase）",
+      "severity": "low",
+      "recommendation": "クラス/構造体/列挙型はUpperCamelCase、変数/関数/定数はlowerCamelCaseを使用してください",
+      "metadata": {
+        "id": "QUAL007",
+        "name": "Naming Convention Violation (Swift)",
+        "language": "swift",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual007_swift_naming_convention.yaml"
+      },
+      "message": "Naming Convention Violation: Swift命名規則に従っていません"
+    }
+  ]
+}

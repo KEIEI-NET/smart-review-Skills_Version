@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "@HostListenerデコレーターを使用（自動クリーンアップ）: @HostListener('window:scroll')",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "\\.addEventListener\\s*\\(",
+      "description": "addEventListener()で登録されたイベントリスナーが適切に削除されていません。コンポーネント破棄時にメモリリークが発生します。",
+      "severity": "high",
+      "recommendation": "|",
+      "metadata": {
+        "id": "PERF021",
+        "name": "Angular EventListener Memory Leak",
+        "language": "@HostListenerデコレーターを使用（自動クリーンアップ）: @HostListener('window:scroll')",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf021_angular_eventlistener_leak.yaml"
+      },
+      "message": "Angular EventListener Memory Leak: addEventListener()で登録されたイベントリスナーが削除されていません。ngOnDestroy()でremoveEventListener()を呼び出してください。"
+    }
+  ]
+}

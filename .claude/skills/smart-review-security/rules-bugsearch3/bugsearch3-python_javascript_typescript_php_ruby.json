@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "[\"python\", \"javascript\", \"typescript\", \"php\", \"ruby\"]",
+  "category": "security",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(innerHTML|outerHTML)\\s*=\\s*.*(input|data|param|user|request|query|body|form|cookie|getParameter|post|get)|\\.html\\s*\\(.*(input|data|param|user|request|query|body|form|cookie|getParameter|post|get)|render_template_string\\s*\\(.*?\\{\\{.*(input|data|param|user|request|query|body|form)",
+      "description": "Detects potential Cross-Site Scripting (XSS) vulnerabilities from unescaped user input in HTML output",
+      "severity": "high",
+      "recommendation": "Use HTML escaping functions (e.g., html.escape() in Python, textContent in JavaScript, htmlspecialchars() in PHP) or template engines with auto-escaping enabled. For static HTML, use string literals.",
+      "metadata": {
+        "id": "SEC002",
+        "name": "XSS Vulnerability",
+        "language": "[\"python\", \"javascript\", \"typescript\", \"php\", \"ruby\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "xss_vulnerability.yaml"
+      },
+      "message": "User input rendered as HTML without escaping can lead to XSS attacks. Static HTML templates are allowed."
+    }
+  ]
+}

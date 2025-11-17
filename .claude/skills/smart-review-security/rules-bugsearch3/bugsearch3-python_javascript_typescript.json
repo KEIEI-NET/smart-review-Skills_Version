@@ -1,0 +1,38 @@
+{
+  "source": "BugSearch3",
+  "language": "[\"python\", \"javascript\", \"typescript\"]",
+  "category": "security",
+  "rules_count": 2,
+  "rules": [
+    {
+      "pattern": "\\brandom\\.(random|randint|choice|randrange)\\s*\\(|Math\\.random\\s*\\(",
+      "description": "Detects use of insecure random number generators for security-sensitive operations",
+      "severity": "medium",
+      "recommendation": "Use secrets module in Python (secrets.token_bytes(), secrets.token_hex()) or crypto.getRandomValues() in JavaScript for security-sensitive operations",
+      "metadata": {
+        "id": "SEC009",
+        "name": "Insecure Random",
+        "language": "[\"python\", \"javascript\", \"typescript\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "insecure_random.yaml"
+      },
+      "message": "The random module/Math.random() is not cryptographically secure and should not be used for security purposes"
+    },
+    {
+      "pattern": "(open|read|write|readFile|writeFile|readFileSync|writeFileSync)\\s*\\([^)]*\\+\\s*\\w+|os\\.path\\.join\\([^)]*\\+|path\\.join\\([^)]*\\+",
+      "description": "Detects potential path traversal vulnerabilities when constructing file paths with user input",
+      "severity": "high",
+      "recommendation": "Validate and sanitize user input, use os.path.abspath() and check if result is within allowed directory, or use a whitelist approach",
+      "metadata": {
+        "id": "SEC007",
+        "name": "Path Traversal",
+        "language": "[\"python\", \"javascript\", \"typescript\"]",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "path_traversal.yaml"
+      },
+      "message": "Constructing file paths with user input can lead to path traversal attacks"
+    }
+  ]
+}

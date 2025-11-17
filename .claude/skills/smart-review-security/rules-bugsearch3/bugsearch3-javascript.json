@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "javascript",
+  "category": "security",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "\\$_(GET|POST|REQUEST|COOKIE)\\s*\\[[^\\]]+\\][^;]*\\$\\w+\\s*[.+]=\\s*[\"']SELECT",
+      "description": "ユーザー入力を直接SQL文に結合することによる重大なセキュリティ脆弱性",
+      "severity": "critical",
+      "recommendation": "PDO Prepared Statements使用: $stmt = $pdo->prepare(''SELECT * FROM",
+      "metadata": {
+        "id": "SEC011",
+        "name": "SQL Injection Vulnerability",
+        "language": "javascript",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec011_sql_injection_vulnerability.yaml"
+      },
+      "message": "SQL Injection Vulnerability: ユーザー入力を直接SQL文に結合することによる重大なセキュリティ脆弱性"
+    },
+    {
+      "pattern": "echo\\s+\\$_(GET|POST|REQUEST|COOKIE)\\[",
+      "description": "ユーザー入力を未エスケープでHTML出力することによるXSS攻撃の脆弱性",
+      "severity": "critical",
+      "recommendation": "htmlspecialchars使用: echo htmlspecialchars($_GET[''name''], ENT_QUOTES,",
+      "metadata": {
+        "id": "SEC012",
+        "name": "XSS Vulnerability",
+        "language": "javascript",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec012_xss_vulnerability.yaml"
+      },
+      "message": "XSS Vulnerability: ユーザー入力を未エスケープでHTML出力することによるXSS攻撃の脆弱性"
+    },
+    {
+      "pattern": "(public|private|protected)?\\s+(float|double|float64|float32)\\s+(price|amount|total|cost|balance|fee|tax|discount|payment|salary|revenue|profit)\\b|(\\bprice\\b|\\bamount\\b|\\btotal\\b|\\bcost\\b|\\bbalance\\b|\\bfee\\b|\\btax\\b|\\bdiscount\\b|\\bpayment\\b|\\bsalary\\b|\\brevenue\\b|\\bprofit\\b)\\s+(float64|float32)\\b",
+      "description": "金額計算にfloat/double型を使用することによる丸め誤差と財務データ不整合",
+      "severity": "critical",
+      "recommendation": "decimal型を使用: decimal price = 19.99m; BigDecimalを使用: BigDecimal price",
+      "metadata": {
+        "id": "SEC013",
+        "name": "Float/Double for Money",
+        "language": "javascript",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec013_floatdouble_for_money.yaml"
+      },
+      "message": "Float/Double for Money: 金額計算にfloat/double型を使用することによる丸め誤差と財務データ不整合"
+    }
+  ]
+}

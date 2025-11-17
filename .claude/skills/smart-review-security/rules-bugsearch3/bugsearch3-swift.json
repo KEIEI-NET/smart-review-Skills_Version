@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "swift",
+  "category": "security",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "\\w+!\\s*\\.|\\w+!\\s*\\[|\\w+!\\s*\\(|as!\\s+\\w+",
+      "description": "オプショナル型の強制アンラップ（!）の過度な使用",
+      "severity": "high",
+      "recommendation": "if let, guard let, またはnil合体演算子(??)を使用して安全にアンラップしてください",
+      "metadata": {
+        "id": "SEC015",
+        "name": "Forced Unwrapping (Swift)",
+        "language": "swift",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec015_swift_forced_unwrap.yaml"
+      },
+      "message": "Forced Unwrapping: オプショナル型の強制アンラップは実行時クラッシュのリスクがあります"
+    }
+  ]
+}

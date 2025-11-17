@@ -1,0 +1,158 @@
+{
+  "source": "BugSearch3",
+  "language": "csharp",
+  "category": "debug",
+  "rules_count": 10,
+  "rules": [
+    {
+      "pattern": "foreach\\s*\\([^)]+\\)\\s*\\{[^}]*\\.Where\\(",
+      "description": "ループ内でのデータベースクエリ実行によるパフォーマンス問題",
+      "severity": "critical",
+      "recommendation": "ループ外で一括取得してからメモリ内で処理 JOIN句を使用して一度のクエリで取得",
+      "metadata": {
+        "id": "DB001",
+        "name": "N+1 Query Problem",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db001_n1_query_problem.yaml"
+      },
+      "message": "N+1 Query Problem: ループ内でのデータベースクエリ実行によるパフォーマンス問題"
+    },
+    {
+      "pattern": "\\.FromSqlRaw\\s*\\(\\s*\"SELECT\\s+\\*",
+      "description": "SELECT * の使用によるパフォーマンス低下とメモリ浪費",
+      "severity": "high",
+      "recommendation": "必要なカラムのみを明示的に指定: SELECT col1, col2, col3 FROM table ORM使用時は射影機能を利用",
+      "metadata": {
+        "id": "DB002",
+        "name": "SELECT * Anti-Pattern",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db002_select_anti_pattern.yaml"
+      },
+      "message": "SELECT * Anti-Pattern: SELECT * の使用によるパフォーマンス低下とメモリ浪費"
+    },
+    {
+      "pattern": "JOIN\\s+[\\w\\.]+\\s+ON\\s+[^J]+JOIN\\s+[\\w\\.]+\\s+ON\\s+[^J]+JOIN",
+      "description": "3つ以上のJOINによるクエリパフォーマンスの低下",
+      "severity": "high",
+      "recommendation": "クエリを分割して、複数の単純なクエリに分ける マテリアライズドビューを作成してJOINを事前計算",
+      "metadata": {
+        "id": "DB003",
+        "name": "Excessive JOIN Operations",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db003_excessive_join_operations.yaml"
+      },
+      "message": "Excessive JOIN Operations: 3つ以上のJOINによるクエリパフォーマンスの低下"
+    },
+    {
+      "pattern": "WHERE\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*=|JOIN\\s+\\w+\\s+ON\\s+[a-zA-Z_][a-zA-Z0-9_]*\\.",
+      "description": "Queries without proper indexes cause full table scans and performance degradation",
+      "severity": "critical",
+      "recommendation": "Create indexes on frequently queried columns: CREATE INDEX idx_column_name ON table_name(column_name); Use EXPLAIN to analyze query performance",
+      "metadata": {
+        "id": "DB004",
+        "name": "MySQL Query Without Index",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db004_mysql_missing_index.yaml"
+      },
+      "message": "MySQL Query Without Index: Queries without proper indexes cause full table scans and performance degradation"
+    },
+    {
+      "pattern": "SELECT\\s+DISTINCT|OFFSET\\s+\\d{4,}|LIKE\\s+[''\"]%.*%[''\"| ]",
+      "description": "Detects common PostgreSQL anti-patterns that can harm performance",
+      "severity": "high",
+      "recommendation": "Avoid DISTINCT when possible, use efficient pagination with cursors instead of large OFFSETs, and optimize LIKE queries with proper indexes or full-text search",
+      "metadata": {
+        "id": "DB005",
+        "name": "PostgreSQL Performance Anti-Pattern",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db005_postgresql_antipattern.yaml"
+      },
+      "message": "PostgreSQL Performance Anti-Pattern: Common anti-patterns detected that can harm database performance"
+    },
+    {
+      "pattern": "ROWNUM\\s*>\\s*\\d+|DUAL|CONNECT\\s+BY|HINT",
+      "description": "Detects Oracle-specific anti-patterns and performance issues",
+      "severity": "high",
+      "recommendation": "Use modern pagination with ROW_NUMBER() or OFFSET/FETCH, avoid unnecessary DUAL queries, optimize hierarchical queries with CONNECT BY, and use hints judiciously",
+      "metadata": {
+        "id": "DB007",
+        "name": "Oracle Database Anti-Pattern",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db007_oracle_antipattern.yaml"
+      },
+      "message": "Oracle Database Anti-Pattern: Oracle-specific patterns detected that may indicate performance or maintainability issues"
+    },
+    {
+      "pattern": "\\.keys\\s*\\(|KEYS\\s+\\*|\\.scan\\s*\\(0,|\\.get\\s*\\([^)]+\\)\\s*\\.get\\s*\\(",
+      "description": "Detects Redis usage patterns that violate best practices",
+      "severity": "medium",
+      "recommendation": "Avoid KEYS command in production (use SCAN instead), implement proper cursor-based scanning, and batch GET operations with MGET",
+      "metadata": {
+        "id": "DB008",
+        "name": "Redis Best Practice Violation",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db008_redis_antipattern.yaml"
+      },
+      "message": "Redis Best Practice Violation: Detected usage patterns that may cause performance issues or blocking operations"
+    },
+    {
+      "pattern": "\\.get\\s*\\([^)]+\\)\\s*\\.get\\s*\\(|\\.set\\s*\\([^,]+,\\s*[^,]+,\\s*0\\)|cache\\.\\w+\\([^)]{200,}\\)",
+      "description": "Detects Memcached usage patterns that should be optimized",
+      "severity": "medium",
+      "recommendation": "Batch GET operations with get_multi, set appropriate expiration times (avoid 0 for infinite), and keep cache keys and values reasonably sized",
+      "metadata": {
+        "id": "DB009",
+        "name": "Memcached Optimization Issue",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db009_memcached_antipattern.yaml"
+      },
+      "message": "Memcached Optimization Issue: Detected patterns that may not be using Memcached efficiently"
+    },
+    {
+      "pattern": "ALLOW\\s+FILTERING|SELECT\\s+\\*\\s+FROM|IN\\s*\\([^)]{100,}\\)|DELETE\\s+FROM.*WHERE",
+      "description": "Detects Cassandra usage patterns that violate best practices",
+      "severity": "high",
+      "recommendation": "Avoid ALLOW FILTERING (design better partition keys), limit SELECT * usage, avoid large IN clauses, and be cautious with DELETE operations",
+      "metadata": {
+        "id": "DB010",
+        "name": "Cassandra Anti-Pattern",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db010_cassandra_antipattern.yaml"
+      },
+      "message": "Cassandra Anti-Pattern: Detected query patterns that may cause performance issues in Cassandra"
+    },
+    {
+      "pattern": "from[\"\\s:]+\\d{4,}|size[\"\\s:]+\\d{4,}|wildcard.*\\*.*\\*|script.*painless",
+      "description": "Detects Elasticsearch usage patterns that should be optimized",
+      "severity": "high",
+      "recommendation": "Use search_after for deep pagination instead of large from/size, optimize wildcard queries, and minimize script usage for better performance",
+      "metadata": {
+        "id": "DB011",
+        "name": "Elasticsearch Optimization Issue",
+        "language": "csharp",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db011_elasticsearch_antipattern.yaml"
+      },
+      "message": "Elasticsearch Optimization Issue: Detected patterns that may cause performance degradation in Elasticsearch"
+    }
+  ]
+}

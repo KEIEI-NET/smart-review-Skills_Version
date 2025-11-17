@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "typescript",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(window\\.\\w+\\s*=|global\\.\\w+\\s*=|globalThis\\.\\w+\\s*=)",
+      "description": "window/globalオブジェクトへの直接代入を検出",
+      "severity": "medium",
+      "recommendation": "モジュールシステム（ES6 modules）やクロージャを使用してスコープを管理してください",
+      "metadata": {
+        "id": "QUAL010",
+        "name": "JavaScript Window Global Usage",
+        "language": "typescript",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual010_js_window_global.yaml"
+      },
+      "message": "Window/Global Assignment: グローバルスコープへの直接代入は名前空間を汚染し、予期しない動作を引き起こします"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "[\"python\", \"javascript\", \"java\", \"csharp\"]",
+  "category": "quality",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "for\\s+\\w+\\s+in\\s+.*?:\\s*.*?for\\s+\\w+\\s+in\\s+.*?:|for\\s*\\([^)]+\\)\\s*\\{[^}]*for\\s*\\([^)]+\\)\\s*\\{|foreach\\s*\\([^)]+\\)\\s*\\{[^}]*foreach\\s*\\([^)]+\\)\\s*\\{",
+      "description": "Detects nested loops that may indicate O(n²) or worse algorithmic complexity",
+      "severity": "medium",
+      "recommendation": "Consider using hash maps, sets, or more efficient algorithms. For common patterns: use dictionary lookups instead of nested loops, or consider sorting + two-pointer approach.",
+      "metadata": {
+        "id": "PERF004",
+        "name": "Inefficient Algorithm",
+        "language": "[\"python\", \"javascript\", \"java\", \"csharp\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "inefficient_algorithm.yaml"
+      },
+      "message": "Nested loop detected. This may result in O(n²) or worse time complexity and performance issues with large datasets."
+    },
+    {
+      "pattern": "while\\s+True\\s*:|while\\s*\\(\\s*true\\s*\\)|while\\s*\\(\\s*1\\s*\\)|for\\s*\\(\\s*;\\s*;\\s*\\)|loop\\s*\\{",
+      "description": "Detects while(true) or similar patterns without clear exit conditions that may cause infinite loops",
+      "severity": "medium",
+      "recommendation": "Add clear exit conditions using break statements or refactor to use a condition-based loop. Ensure that the loop can terminate under expected conditions.",
+      "metadata": {
+        "id": "PERF002",
+        "name": "Infinite Loop Risk",
+        "language": "[\"python\", \"javascript\", \"java\", \"csharp\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "infinite_loop_risk.yaml"
+      },
+      "message": "Infinite loop pattern detected without clear exit condition. This can cause application hangs if break/return conditions are missing."
+    },
+    {
+      "pattern": "def\\s+\\w+\\s*\\([^)]*\\)\\s*:[\\s\\S]{0,1000}?\\b(?:if|elif|else|for|while|and|or|try|except)\\b[\\s\\S]{0,200}?\\b(?:if|elif|else|for|while|and|or|try|except)\\b[\\s\\S]{0,200}?\\b(?:if|elif|else|for|while|and|or|try|except)\\b|function\\s+\\w+\\s*\\([^)]*\\)\\s*\\{[\\s\\S]{0,1000}?(?:if|else|for|while|case|try|catch|&&|\\|\\|)[\\s\\S]{0,200}?(?:if|else|for|while|case|try|catch|&&|\\|\\|)[\\s\\S]{0,200}?(?:if|else|for|while|case|try|catch|&&|\\|\\|)",
+      "description": "Detects functions with high cyclomatic complexity (10+ decision points)",
+      "severity": "medium",
+      "recommendation": "Refactor the function into smaller, focused functions. Extract complex conditions into well-named helper functions. Consider using early returns to reduce nesting.",
+      "metadata": {
+        "id": "QUAL001",
+        "name": "High Complexity",
+        "language": "[\"python\", \"javascript\", \"java\", \"csharp\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "high_complexity.yaml"
+      },
+      "message": "Function has high cyclomatic complexity. Complex functions are hard to understand, test, and maintain."
+    }
+  ]
+}

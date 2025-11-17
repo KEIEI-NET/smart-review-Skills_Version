@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "Decimal.jsのDecimal(string)コンストラクタを使用",
+  "category": "security",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "parseFloat\\s*\\([^)]*?(price|amount|total|cost|balance|fee|tax|discount|payment|salary|revenue|profit)",
+      "description": "parseFloatを使用した金額のパースによる精度問題",
+      "severity": "medium",
+      "recommendation": "|",
+      "metadata": {
+        "id": "SEC019",
+        "name": "JavaScript/TypeScript parseFloat for Money",
+        "language": "Decimal.jsのDecimal(string)コンストラクタを使用",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec019_js_parseFloat_money.yaml"
+      },
+      "message": "parseFloat for Money: parseFloatは浮動小数点数を返すため、金額計算に不適切です。"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "decimal.jsライブラリを使用: const price = new Decimal('19.99');",
+  "category": "security",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(const|let|var)\\s+(price|amount|total|cost|balance|fee|tax|discount|payment|salary|revenue|profit|subtotal|grandTotal|netAmount)\\s*(:|=)\\s*(number|0\\.0|\\d+\\.\\d+)|:\\s*number\\s*=\\s*\\d+\\.\\d+.*(price|amount|total|cost|balance|fee|tax|discount|payment)",
+      "description": "TypeScriptのnumber型（内部的にIEEE 754 double）を金額計算に使用することによる丸め誤差",
+      "severity": "critical",
+      "recommendation": "|",
+      "metadata": {
+        "id": "SEC017",
+        "name": "JavaScript/TypeScript Number Type for Money",
+        "language": "decimal.jsライブラリを使用: const price = new Decimal('19.99');",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec017_js_number_for_money.yaml"
+      },
+      "message": "Number Type for Money: JavaScriptのnumber型は浮動小数点数のため、金額計算で丸め誤差が発生します。"
+    }
+  ]
+}

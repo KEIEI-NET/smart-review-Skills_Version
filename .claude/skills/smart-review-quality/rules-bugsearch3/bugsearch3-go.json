@@ -1,0 +1,68 @@
+{
+  "source": "BugSearch3",
+  "language": "go",
+  "category": "quality",
+  "rules_count": 4,
+  "rules": [
+    {
+      "pattern": "\\w+\\s*\\*\\s*\\w+\\s*=\\s*new\\s+\\w+",
+      "description": "メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放",
+      "severity": "critical",
+      "recommendation": "スマートポインタを使用: std::unique_ptr<T> ptr = std::make_unique<T>(); 必ずfree()を呼ぶ:",
+      "metadata": {
+        "id": "PERF006",
+        "name": "Memory Leak",
+        "language": "go",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf006_memory_leak.yaml"
+      },
+      "message": "Memory Leak: メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放"
+    },
+    {
+      "pattern": "go\\s+func\\s*\\([^)]*\\)\\s*\\{[^}]*for\\s*\\{[^}]*\\}[^}]*\\}",
+      "description": "Goroutineリークの可能性: 終了しないgoroutineによるメモリリークとリソース枯渇",
+      "severity": "critical",
+      "recommendation": "context.Contextでgoroutineのライフサイクルを管理 select文でcontext.Done()を監視",
+      "metadata": {
+        "id": "PERF007",
+        "name": "Goroutine Leak",
+        "language": "go",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf007_goroutine_leak.yaml"
+      },
+      "message": "Goroutine Leak: Goroutineリークの可能性: 終了しないgoroutineによるメモリリークとリソース枯渇"
+    },
+    {
+      "pattern": "class\\s+\\w+[^{]*\\{(?:[^{}]|\\{[^{}]*\\}){500,}\\}",
+      "description": "単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い",
+      "severity": "medium",
+      "recommendation": "クラスを責務ごとに分割 Extract Class リファクタリング: 関連するメソッドとフィールドを新しいクラスに抽出",
+      "metadata": {
+        "id": "SOLID001",
+        "name": "Large Class (God Class)",
+        "language": "go",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid001_large_class_god_class.yaml"
+      },
+      "message": "Large Class (God Class): 単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い"
+    },
+    {
+      "pattern": "interface\\s+I\\w+[^{]*\\{[^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\(",
+      "description": "インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する",
+      "severity": "medium",
+      "recommendation": "インターフェースを責務ごとに分割 Role Interfaces: クライアントの役割ごとにインターフェースを定義",
+      "metadata": {
+        "id": "SOLID002",
+        "name": "Large Interface (Fat Interface)",
+        "language": "go",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid002_large_interface_fat_interface.yaml"
+      },
+      "message": "Large Interface (Fat Interface): インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する"
+    }
+  ]
+}

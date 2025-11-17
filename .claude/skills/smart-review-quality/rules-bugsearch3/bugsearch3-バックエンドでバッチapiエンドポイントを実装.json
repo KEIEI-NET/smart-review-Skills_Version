@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "バックエンドでバッチAPIエンドポイントを実装",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(\\.forEach\\(|for\\s*\\(.*of\\s|for\\s*\\(.*in\\s|while\\s*\\(|\\.map\\(|\\.filter\\(|ngFor)[^\\}]{0,300}(http\\.|fetch\\(|ajax\\(|\\.get\\(|\\.post\\(|\\.put\\(|\\.delete\\(|\\.patch\\()",
+      "description": "ループ内でのHTTP/APIコール実行によるパフォーマンス問題（JavaScript/TypeScript）",
+      "severity": "critical",
+      "recommendation": "|",
+      "metadata": {
+        "id": "PERF011",
+        "name": "JavaScript/TypeScript N+1 API Call Problem",
+        "language": "バックエンドでバッチAPIエンドポイントを実装",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf011_js_n1_api_call.yaml"
+      },
+      "message": "N+1 API Call Problem: ループ内でHTTP/APIコールを実行しています。パフォーマンスが劣化します。"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "java",
+  "category": "quality",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "SELECT\\s+TOP\\s+\\d{4,}|NOLOCK|sp_executesql|CURSOR",
+      "description": "Detects SQL Server specific performance issues",
+      "severity": "high",
+      "recommendation": "Avoid SELECT TOP with large numbers, review NOLOCK usage for consistency requirements, optimize dynamic SQL, and consider alternatives to cursors",
+      "metadata": {
+        "id": "DB006",
+        "name": "SQL Server Performance Issue",
+        "language": "java",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "db006_sqlserver_performance.yaml"
+      },
+      "message": "SQL Server Performance Issue: Detected patterns that may cause performance problems in SQL Server"
+    },
+    {
+      "pattern": "class\\s+\\w+[^{]*\\{(?:[^{}]|\\{[^{}]*\\}){500,}\\}",
+      "description": "単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い",
+      "severity": "medium",
+      "recommendation": "クラスを責務ごとに分割 Extract Class リファクタリング: 関連するメソッドとフィールドを新しいクラスに抽出",
+      "metadata": {
+        "id": "SOLID001",
+        "name": "Large Class (God Class)",
+        "language": "java",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid001_large_class_god_class.yaml"
+      },
+      "message": "Large Class (God Class): 単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い"
+    },
+    {
+      "pattern": "interface\\s+I\\w+[^{]*\\{[^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\(",
+      "description": "インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する",
+      "severity": "medium",
+      "recommendation": "インターフェースを責務ごとに分割 Role Interfaces: クライアントの役割ごとにインターフェースを定義",
+      "metadata": {
+        "id": "SOLID002",
+        "name": "Large Interface (Fat Interface)",
+        "language": "java",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid002_large_interface_fat_interface.yaml"
+      },
+      "message": "Large Interface (Fat Interface): インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する"
+    }
+  ]
+}

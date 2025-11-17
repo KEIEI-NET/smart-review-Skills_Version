@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "コピー＆ペーストされたコードブロック",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(public|private|protected|internal)\\s+(static\\s+)?[\\w<>]+\\s+\\w+\\s*\\([^)]*\\)\\s*\\{[^}]{50,}\\}\\s*[\\s\\S]{0,500}(public|private|protected|internal)\\s+(?:static\\s+)?[\\w<>]+\\s+\\w+\\s*\\(",
+      "description": "DRY原則（Don''t Repeat Yourself）違反を検出します。",
+      "severity": "medium",
+      "recommendation": "The Pragmatic Programmer - DRY原則",
+      "metadata": {
+        "id": "BP001",
+        "name": "DRY原則違反",
+        "language": "コピー＆ペーストされたコードブロック",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "bp001_dry原則違反.yaml"
+      },
+      "message": "DRY原則違反: DRY原則（Don''t Repeat Yourself）違反を検出します。"
+    }
+  ]
+}

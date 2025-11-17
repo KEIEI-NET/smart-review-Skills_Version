@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "delphi",
+  "category": "debug",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "foreach\\s*\\([^)]+\\)\\s*\\{[^}]*\\.Where\\(",
+      "description": "ループ内でのデータベースクエリ実行によるパフォーマンス問題",
+      "severity": "critical",
+      "recommendation": "ループ外で一括取得してからメモリ内で処理 JOIN句を使用して一度のクエリで取得",
+      "metadata": {
+        "id": "DB001",
+        "name": "N+1 Query Problem",
+        "language": "delphi",
+        "category": "debug",
+        "source": "BugSearch3",
+        "source_file": "db001_n1_query_problem.yaml"
+      },
+      "message": "N+1 Query Problem: ループ内でのデータベースクエリ実行によるパフォーマンス問題"
+    }
+  ]
+}

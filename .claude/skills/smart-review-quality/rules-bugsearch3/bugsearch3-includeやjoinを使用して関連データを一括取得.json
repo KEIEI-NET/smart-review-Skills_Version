@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "includeやjoinを使用して関連データを一括取得",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(\\.forEach\\(|for\\s*\\(.*of\\s|\\.map\\()[\\s\\S]{0,150}\\.(find|findOne|findById|findBy|where|query|execute)\\(",
+      "description": "配列ループ内での個別クエリ実行（JavaScript/TypeScript）",
+      "severity": "critical",
+      "recommendation": "|",
+      "metadata": {
+        "id": "PERF012",
+        "name": "JavaScript/TypeScript Array N+1 Query",
+        "language": "includeやjoinを使用して関連データを一括取得",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf012_js_array_n1_query.yaml"
+      },
+      "message": "Array N+1 Query: 配列のループ内で個別にクエリを実行しています。"
+    }
+  ]
+}

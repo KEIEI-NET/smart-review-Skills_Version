@@ -1,0 +1,68 @@
+{
+  "source": "BugSearch3",
+  "language": "cpp",
+  "category": "quality",
+  "rules_count": 4,
+  "rules": [
+    {
+      "pattern": "\\w+\\s*\\*\\s*\\w+\\s*=\\s*new\\s+\\w+",
+      "description": "メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放",
+      "severity": "critical",
+      "recommendation": "スマートポインタを使用: std::unique_ptr<T> ptr = std::make_unique<T>(); 必ずfree()を呼ぶ:",
+      "metadata": {
+        "id": "PERF006",
+        "name": "Memory Leak",
+        "language": "cpp",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf006_memory_leak.yaml"
+      },
+      "message": "Memory Leak: メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放"
+    },
+    {
+      "pattern": "\\bnew\\s+\\w+",
+      "description": "スマートポインタを使用せず生ポインタを直接使用している",
+      "severity": "high",
+      "recommendation": "std::unique_ptr, std::shared_ptr, std::weak_ptr を使用してメモリ管理を自動化してください",
+      "metadata": {
+        "id": "PERF008",
+        "name": "Raw Pointer Usage (C++)",
+        "language": "cpp",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf008_cpp_raw_pointer.yaml"
+      },
+      "message": "Raw Pointer Usage: スマートポインタの代わりに生ポインタを使用しています"
+    },
+    {
+      "pattern": "(fopen|malloc|new)\\s*\\([^)]*\\)",
+      "description": "RAII原則に違反したリソース管理",
+      "severity": "medium",
+      "recommendation": "スマートポインタやRAIIクラス（std::ifstream等）を使用してリソースを自動管理してください",
+      "metadata": {
+        "id": "QUAL006",
+        "name": "RAII Violation (C++)",
+        "language": "cpp",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual006_cpp_raii_violation.yaml"
+      },
+      "message": "RAII Violation: リソース管理がRAII原則に従っていません"
+    },
+    {
+      "pattern": "^\\s*extern\\s+(int|float|double|char|long|short|void|struct|class|bool)\\s+\\w+",
+      "description": "C/C++ externキーワードによるグローバル変数宣言を検出",
+      "severity": "medium",
+      "recommendation": "シングルトンパターン、依存性注入、または適切なスコープ管理を使用してください",
+      "metadata": {
+        "id": "QUAL012",
+        "name": "C/C++ Extern Global Variable",
+        "language": "cpp",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual012_cpp_extern_global.yaml"
+      },
+      "message": "Extern Global Variable: externによるグローバル変数は、名前空間の汚染とテストの困難さを引き起こします"
+    }
+  ]
+}

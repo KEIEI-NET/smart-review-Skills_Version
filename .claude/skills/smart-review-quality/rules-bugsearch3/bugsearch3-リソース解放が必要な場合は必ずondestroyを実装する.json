@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "リソース解放が必要な場合は必ずOnDestroyを実装する",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "implements\\s+[^{]*OnDestroy[^{]*\\{",
+      "description": "コンポーネントがOnDestroyインターフェースを実装していますが、ngOnDestroy()メソッドが実装されていません。またはリソース解放が必要そうなコードがあるのにngOnDestroyが実装されていません。",
+      "severity": "medium",
+      "recommendation": "|",
+      "metadata": {
+        "id": "QUAL020",
+        "name": "Angular Missing ngOnDestroy Implementation",
+        "language": "リソース解放が必要な場合は必ずOnDestroyを実装する",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual020_angular_missing_ngOnDestroy.yaml"
+      },
+      "message": "Angular Missing ngOnDestroy: OnDestroyインターフェースを宣言していますが、ngOnDestroy()が実装されていません。クリーンアップ処理をngOnDestroy()に実装してください。"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "delphi",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "\\w+\\s*\\*\\s*\\w+\\s*=\\s*new\\s+\\w+",
+      "description": "メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放",
+      "severity": "critical",
+      "recommendation": "スマートポインタを使用: std::unique_ptr<T> ptr = std::make_unique<T>(); 必ずfree()を呼ぶ:",
+      "metadata": {
+        "id": "PERF006",
+        "name": "Memory Leak",
+        "language": "delphi",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf006_memory_leak.yaml"
+      },
+      "message": "Memory Leak: メモリリークの可能性: 動的メモリ確保後のdelete/free忘れ、リソースの未解放"
+    }
+  ]
+}

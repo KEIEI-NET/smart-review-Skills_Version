@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "php",
+  "category": "quality",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "(\\$GLOBALS\\[|^\\s*global\\s+\\$)",
+      "description": "PHP $GLOBALS配列やglobalキーワードの使用を検出",
+      "severity": "medium",
+      "recommendation": "依存性注入、クラスプロパティ、または関数の引数を使用してください",
+      "metadata": {
+        "id": "QUAL011",
+        "name": "PHP Globals/Superglobal Usage",
+        "language": "php",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual011_php_globals_superglobal.yaml"
+      },
+      "message": "PHP Globals Usage: $GLOBALSやglobalキーワードの使用は、コードの結合度を高め、保守性を低下させます"
+    },
+    {
+      "pattern": "class\\s+\\w+[^{]*\\{(?:[^{}]|\\{[^{}]*\\}){500,}\\}",
+      "description": "単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い",
+      "severity": "medium",
+      "recommendation": "クラスを責務ごとに分割 Extract Class リファクタリング: 関連するメソッドとフィールドを新しいクラスに抽出",
+      "metadata": {
+        "id": "SOLID001",
+        "name": "Large Class (God Class)",
+        "language": "php",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid001_large_class_god_class.yaml"
+      },
+      "message": "Large Class (God Class): 単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い"
+    },
+    {
+      "pattern": "interface\\s+I\\w+[^{]*\\{[^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\([^}]*\\w+\\s+\\w+\\s*\\(",
+      "description": "インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する",
+      "severity": "medium",
+      "recommendation": "インターフェースを責務ごとに分割 Role Interfaces: クライアントの役割ごとにインターフェースを定義",
+      "metadata": {
+        "id": "SOLID002",
+        "name": "Large Interface (Fat Interface)",
+        "language": "php",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid002_large_interface_fat_interface.yaml"
+      },
+      "message": "Large Interface (Fat Interface): インターフェース分離原則（ISP）違反: 10メソッド以上の巨大インターフェースはクライアントに不要な依存を強制する"
+    }
+  ]
+}

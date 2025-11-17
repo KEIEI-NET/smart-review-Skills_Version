@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "整数演算（セント単位）に変換してから計算",
+  "category": "security",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "(price|amount|total|cost|balance|fee|tax|discount|payment|salary|revenue|profit)\\s*[\\+\\-\\*\\/]=?\\s*(\\d+\\.\\d+|\\d*\\.?\\d+)",
+      "description": "金額に対する浮動小数点演算による精度低下",
+      "severity": "critical",
+      "recommendation": "|",
+      "metadata": {
+        "id": "SEC018",
+        "name": "JavaScript/TypeScript Float Arithmetic for Money",
+        "language": "整数演算（セント単位）に変換してから計算",
+        "category": "security",
+        "source": "BugSearch3",
+        "source_file": "sec018_js_float_arithmetic.yaml"
+      },
+      "message": "Float Arithmetic for Money: 浮動小数点演算により金額計算で精度が失われます。"
+    }
+  ]
+}

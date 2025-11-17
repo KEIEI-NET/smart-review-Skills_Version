@@ -1,0 +1,53 @@
+{
+  "source": "BugSearch3",
+  "language": "python",
+  "category": "quality",
+  "rules_count": 3,
+  "rules": [
+    {
+      "pattern": "SELECT\\s+TOP\\s+\\d{4,}|NOLOCK|sp_executesql|CURSOR",
+      "description": "Detects SQL Server specific performance issues",
+      "severity": "high",
+      "recommendation": "Avoid SELECT TOP with large numbers, review NOLOCK usage for consistency requirements, optimize dynamic SQL, and consider alternatives to cursors",
+      "metadata": {
+        "id": "DB006",
+        "name": "SQL Server Performance Issue",
+        "language": "python",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "db006_sqlserver_performance.yaml"
+      },
+      "message": "SQL Server Performance Issue: Detected patterns that may cause performance problems in SQL Server"
+    },
+    {
+      "pattern": "^\\s*global\\s+\\w+",
+      "description": "Python global キーワードの使用を検出",
+      "severity": "medium",
+      "recommendation": "クラスのインスタンス変数、引数の受け渡し、または戻り値を使用してください",
+      "metadata": {
+        "id": "QUAL009",
+        "name": "Python Global Keyword Usage",
+        "language": "python",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "qual009_python_global_keyword.yaml"
+      },
+      "message": "Python Global Keyword: global キーワードの使用は、関数の副作用を増やし、テストを困難にします"
+    },
+    {
+      "pattern": "class\\s+\\w+[^{]*\\{(?:[^{}]|\\{[^{}]*\\}){500,}\\}",
+      "description": "単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い",
+      "severity": "medium",
+      "recommendation": "クラスを責務ごとに分割 Extract Class リファクタリング: 関連するメソッドとフィールドを新しいクラスに抽出",
+      "metadata": {
+        "id": "SOLID001",
+        "name": "Large Class (God Class)",
+        "language": "python",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "solid001_large_class_god_class.yaml"
+      },
+      "message": "Large Class (God Class): 単一責任原則（SRP）違反: 500行以上の巨大クラスは複数の責務を持つ可能性が高い"
+    }
+  ]
+}

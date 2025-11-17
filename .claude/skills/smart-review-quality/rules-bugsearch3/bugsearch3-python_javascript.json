@@ -1,0 +1,113 @@
+{
+  "source": "BugSearch3",
+  "language": "[\"python\", \"javascript\"]",
+  "category": "quality",
+  "rules_count": 7,
+  "rules": [
+    {
+      "pattern": "\\.read\\(\\)|\\.readlines\\(\\)|\\.readAll\\(\\)|fs\\.readFileSync\\s*\\(|JSON\\.parse\\(.*?\\.read\\(\\)|\\.load\\(\\)|pd\\.read_csv\\(",
+      "description": "Detects operations that load entire files or datasets into memory",
+      "severity": "medium",
+      "recommendation": "Use streaming or chunked reading for large files. Python: use readline() or iterate over file object. For CSV: use chunksize parameter. JavaScript: use streams or readline interface.",
+      "metadata": {
+        "id": "PERF005",
+        "name": "Large Data Processing",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "large_data_processing.yaml"
+      },
+      "message": "Large data is being loaded entirely into memory. This can cause memory issues with large files or datasets."
+    },
+    {
+      "pattern": "\\bopen\\s*\\(|\\bconnect\\s*\\(|new\\s+(File|Connection|Stream)\\s*\\(|fs\\.open\\s*\\(",
+      "description": "Detects opened files, connections, or resources that may not be properly closed",
+      "severity": "high",
+      "recommendation": "Use context managers (with statement in Python) or try-finally blocks to ensure resources are properly closed. For JavaScript: Use try-finally or modern APIs with automatic cleanup.",
+      "metadata": {
+        "id": "PERF003",
+        "name": "Memory Leak Possibility",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "memory_leak_possibility.yaml"
+      },
+      "message": "File or connection opened without proper cleanup. This can lead to resource leaks and memory issues."
+    },
+    {
+      "pattern": "for\\s+\\w+\\s+in\\s+.*?:\\s*.*?(execute|query|find|findOne|findMany|select|get)\\s*\\(|while\\s+.*?:\\s*.*?(execute|query|find|findOne|findMany|select|get)\\s*\\(|\\bfor\\s*\\(\\s*.*?\\s*;\\s*.*?\\s*;\\s*.*?\\)\\s*\\{[^}]*(execute|query|find|findOne|findMany|select|get)\\s*\\(",
+      "description": "Detects potential N+1 query problems where database queries are executed inside loops",
+      "severity": "high",
+      "recommendation": "Use batch queries or eager loading to fetch all required data in a single query. For SQL: Use JOIN or WHERE IN. For ORMs: Use prefetch_related() or include options.",
+      "metadata": {
+        "id": "PERF001",
+        "name": "N+1 Query Problem",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "n_plus_one_query.yaml"
+      },
+      "message": "Database query detected inside a loop. This can cause N+1 query problems and severe performance degradation."
+    },
+    {
+      "pattern": "(def\\s+\\w+.*?:\\s*.*?return\\s+.*?)\\s+(def\\s+\\w+.*?:\\s*.*?return\\s+)|(function\\s+\\w+.*?\\{.*?return\\s+.*?\\}\\s+function\\s+\\w+.*?\\{.*?return\\s+.*?\\})",
+      "description": "Detects duplicated code blocks that should be refactored",
+      "severity": "low",
+      "recommendation": "Extract common code into a shared function or utility. Use inheritance or composition to share functionality. Consider using decorators or higher-order functions for common patterns.",
+      "metadata": {
+        "id": "QUAL002",
+        "name": "Code Duplication",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "code_duplication.yaml"
+      },
+      "message": "Potential code duplication detected. Duplicated code increases maintenance burden and risk of inconsistent changes."
+    },
+    {
+      "pattern": "return[^\\n]*\\n\\s+[a-zA-Z_]\\w*|(?:break|continue)\\s*;?\\s*\\n\\s+[a-zA-Z_]\\w*",
+      "description": "Detects unreachable code after return, break, or continue statements",
+      "severity": "low",
+      "recommendation": "Remove the unreachable code or restructure the logic. If the code is needed, move it before the return/break/continue statement.",
+      "metadata": {
+        "id": "QUAL003",
+        "name": "Dead Code",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "dead_code.yaml"
+      },
+      "message": "Unreachable code detected after return/break/continue statement. This code will never execute."
+    },
+    {
+      "pattern": "def\\s+[a-zA-Z_]\\w*\\s*\\([^)]*\\)\\s*:\\s*[^\"\"\"'''''']+|\\n\\s*function\\s+[a-zA-Z_]\\w*\\s*\\([^)]*\\)\\s*\\{",
+      "description": "Detects functions without docstrings or JSDoc comments",
+      "severity": "low",
+      "recommendation": "Add docstrings (Python) or JSDoc comments (JavaScript) to describe function purpose, parameters, return values, and potential exceptions.",
+      "metadata": {
+        "id": "QUAL005",
+        "name": "Missing Documentation",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "missing_documentation.yaml"
+      },
+      "message": "Function missing documentation. Undocumented functions are harder to understand and use correctly."
+    },
+    {
+      "pattern": "def\\s+[a-z]+[A-Z][a-zA-Z]*\\s*\\(|class\\s+[a-z][a-z_]*\\s*[:\\(]|function\\s+[a-z]+_[a-z_]+\\s*\\(|const\\s+[a-z]+_[a-z_]+\\s*=|let\\s+[a-z]+_[a-z_]+\\s*=|var\\s+[a-z]+_[a-z_]+\\s*=",
+      "description": "Detects violations of naming conventions (snake_case for Python, camelCase for JavaScript)",
+      "severity": "low",
+      "recommendation": "Python: Use snake_case for functions/variables, PascalCase for classes. JavaScript: Use camelCase for functions/variables, PascalCase for classes/components.",
+      "metadata": {
+        "id": "QUAL004",
+        "name": "Naming Convention Violation",
+        "language": "[\"python\", \"javascript\"]",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "naming_convention_violation.yaml"
+      },
+      "message": "Naming convention violation detected. Inconsistent naming makes code harder to read and maintain."
+    }
+  ]
+}

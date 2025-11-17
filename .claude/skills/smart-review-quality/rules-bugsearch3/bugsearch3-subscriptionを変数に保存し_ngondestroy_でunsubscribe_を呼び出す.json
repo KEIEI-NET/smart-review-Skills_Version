@@ -1,0 +1,23 @@
+{
+  "source": "BugSearch3",
+  "language": "subscriptionを変数に保存し、ngOnDestroy()でunsubscribe()を呼び出す",
+  "category": "quality",
+  "rules_count": 1,
+  "rules": [
+    {
+      "pattern": "\\.subscribe\\s*\\([^)]*\\)",
+      "description": "RxJS Subscriptionが適切に解除されていません。コンポーネント破棄時にメモリリークが発生します。",
+      "severity": "high",
+      "recommendation": "|",
+      "metadata": {
+        "id": "PERF020",
+        "name": "Angular Subscription Memory Leak",
+        "language": "subscriptionを変数に保存し、ngOnDestroy()でunsubscribe()を呼び出す",
+        "category": "quality",
+        "source": "BugSearch3",
+        "source_file": "perf020_angular_subscription_leak.yaml"
+      },
+      "message": "Angular Subscription Memory Leak: RxJS Subscriptionが適切に解除されていません。ngOnDestroy()でunsubscribe()を呼び出してください。"
+    }
+  ]
+}

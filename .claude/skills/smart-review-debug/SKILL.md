@@ -43,18 +43,23 @@ const name = user?.profile?.name ?? 'Unknown';
 - TypeScript型定義との不整合
 - 暗黙的な型変換（== vs ===）
 - 型アサーションの誤用（as any）
+- any[] や Array<any> の使用（型安全性の喪失）
 - 不適切な型キャスト
 - 数値と文字列の混在演算
 
-**重要度:** Medium
+**重要度:** Medium to High
 
 **よくあるパターン:**
-```javascript
+```typescript
 // 危険
 if (value == null) // undefined も true になる
+const items: any[] = []; // 型安全性が失われる
+const data: Array<any> = []; // 型安全性が失われる
 
 // 安全
 if (value === null)
+const items: string[] = []; // 具体的な型を指定
+const data: Array<User> = []; // 具体的な型を指定
 ```
 
 ### 3. ロジックエラー

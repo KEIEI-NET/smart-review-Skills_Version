@@ -32,19 +32,24 @@ if (index >= 0 && index < array.length) {
 - [ ] 厳密等価演算子 (===, !==) の使用
 - [ ] TypeScript の型定義との整合性
 - [ ] as any の使用を最小限に
+- [ ] any[] や Array<any> の使用を避ける
 - [ ] 数値と文字列の明示的な変換
 - [ ] boolean 型の適切な使用
 - [ ] typeof チェックの実施
 
 ### コード例
-```javascript
+```typescript
 // ❌ 悪い例
 if (value == null) // undefined も true
 const result = '5' + 3; // '53'
+const items: any[] = []; // 型安全性が失われる
+const data: Array<any> = []; // 型安全性が失われる
 
 // ✅ 良い例
 if (value === null)
 const result = Number('5') + 3; // 8
+const items: string[] = []; // 具体的な型を指定
+const data: Array<User> = []; // 具体的な型を指定
 ```
 
 ## 3. ロジックエラー

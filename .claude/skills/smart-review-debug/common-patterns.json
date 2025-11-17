@@ -45,6 +45,26 @@
       "description": "TypeScriptでas anyを使用",
       "severity": "medium",
       "recommendation": "適切な型定義を使用してください"
+    },
+    {
+      "pattern": ":\\s*any\\[\\]",
+      "description": "any[] 型の使用（型安全性が失われる）",
+      "severity": "high",
+      "recommendation": "具体的な型を定義してください。例: string[], number[], CustomType[]",
+      "example": "const items: string[] = []; // 良い例\nconst items: any[] = []; // 悪い例"
+    },
+    {
+      "pattern": ":\\s*Array<any>",
+      "description": "Array<any> 型の使用（型安全性が失われる）",
+      "severity": "high",
+      "recommendation": "具体的な型を定義してください。例: Array<string>, Array<CustomType>",
+      "example": "const items: Array<string> = []; // 良い例"
+    },
+    {
+      "pattern": "\\bany\\[\\]\\b",
+      "description": "any[] 型の使用",
+      "severity": "high",
+      "recommendation": "具体的な型を定義してください"
     }
   ],
   "async_await": [

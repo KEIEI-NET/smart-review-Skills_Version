@@ -1,0 +1,134 @@
+{
+  "cwe": {
+    "CWE-22": {
+      "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "description": "パストラバーサル脆弱性。ユーザーが意図しないディレクトリにアクセスできる。",
+      "severity": "high",
+      "owasp": "A01:2021 - Broken Access Control"
+    },
+    "CWE-78": {
+      "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",
+      "description": "OSコマンドインジェクション。任意のシステムコマンドを実行される可能性。",
+      "severity": "critical",
+      "owasp": "A03:2021 - Injection"
+    },
+    "CWE-79": {
+      "name": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "description": "XSS脆弱性。悪意あるスクリプトがユーザーのブラウザで実行される。",
+      "severity": "high",
+      "owasp": "A03:2021 - Injection"
+    },
+    "CWE-89": {
+      "name": "Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "description": "SQLインジェクション。データベースへの不正アクセスやデータ漏洩のリスク。",
+      "severity": "critical",
+      "owasp": "A03:2021 - Injection"
+    },
+    "CWE-95": {
+      "name": "Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')",
+      "description": "eval インジェクション。任意のコードが実行される可能性。",
+      "severity": "critical",
+      "owasp": "A03:2021 - Injection"
+    },
+    "CWE-287": {
+      "name": "Improper Authentication",
+      "description": "不適切な認証。認証機構のバイパスやなりすましのリスク。",
+      "severity": "high",
+      "owasp": "A07:2021 - Identification and Authentication Failures"
+    },
+    "CWE-327": {
+      "name": "Use of a Broken or Risky Cryptographic Algorithm",
+      "description": "弱い暗号化アルゴリズムの使用。暗号化されたデータが解読される可能性。",
+      "severity": "high",
+      "owasp": "A02:2021 - Cryptographic Failures"
+    },
+    "CWE-338": {
+      "name": "Use of Cryptographically Weak Pseudo-Random Number Generator (PRNG)",
+      "description": "暗号学的に弱い乱数生成器の使用。予測可能な値が生成される。",
+      "severity": "medium",
+      "owasp": "A02:2021 - Cryptographic Failures"
+    },
+    "CWE-347": {
+      "name": "Improper Verification of Cryptographic Signature",
+      "description": "暗号署名の不適切な検証。改ざんされたデータを受け入れる可能性。",
+      "severity": "high",
+      "owasp": "A02:2021 - Cryptographic Failures"
+    },
+    "CWE-352": {
+      "name": "Cross-Site Request Forgery (CSRF)",
+      "description": "CSRF攻撃。ユーザーの意図しない操作が実行される。",
+      "severity": "medium",
+      "owasp": "A01:2021 - Broken Access Control"
+    },
+    "CWE-532": {
+      "name": "Insertion of Sensitive Information into Log File",
+      "description": "ログファイルへの機密情報の記録。ログを通じた情報漏洩のリスク。",
+      "severity": "high",
+      "owasp": "A09:2021 - Security Logging and Monitoring Failures"
+    },
+    "CWE-611": {
+      "name": "Improper Restriction of XML External Entity Reference",
+      "description": "XXE攻撃。XMLパースを通じてファイル読み取りやSSRFが可能。",
+      "severity": "high",
+      "owasp": "A05:2021 - Security Misconfiguration"
+    },
+    "CWE-614": {
+      "name": "Sensitive Cookie in HTTPS Session Without 'Secure' Attribute",
+      "description": "セキュアでないCookie。中間者攻撃でCookieが盗まれる可能性。",
+      "severity": "high",
+      "owasp": "A05:2021 - Security Misconfiguration"
+    },
+    "CWE-798": {
+      "name": "Use of Hard-coded Credentials",
+      "description": "ハードコードされた認証情報。ソースコード漏洩時に即座に悪用される。",
+      "severity": "critical",
+      "owasp": "A07:2021 - Identification and Authentication Failures"
+    },
+    "CWE-942": {
+      "name": "Permissive Cross-domain Policy with Untrusted Domains",
+      "description": "過度に許可的なCORS設定。意図しないドメインからのアクセスを許可。",
+      "severity": "medium",
+      "owasp": "A05:2021 - Security Misconfiguration"
+    },
+    "CWE-1004": {
+      "name": "Sensitive Cookie Without 'HttpOnly' Flag",
+      "description": "HttpOnlyフラグのないCookie。XSS攻撃でCookieが盗まれる可能性。",
+      "severity": "medium",
+      "owasp": "A05:2021 - Security Misconfiguration"
+    }
+  },
+  "severity_mapping": {
+    "critical": {
+      "priority": 1,
+      "action": "即座に修正が必要",
+      "impact": "システムへの深刻な影響、データ漏洩、完全な侵害の可能性"
+    },
+    "high": {
+      "priority": 2,
+      "action": "早急に修正すべき",
+      "impact": "重大なセキュリティリスク、限定的なデータ漏洩の可能性"
+    },
+    "medium": {
+      "priority": 3,
+      "action": "計画的に修正",
+      "impact": "潜在的なセキュリティリスク、他の脆弱性と組み合わさることで危険"
+    },
+    "low": {
+      "priority": 4,
+      "action": "将来的に改善",
+      "impact": "軽微なリスク、ベストプラクティスからの逸脱"
+    }
+  },
+  "owasp_top_10_2021": {
+    "A01": "Broken Access Control",
+    "A02": "Cryptographic Failures",
+    "A03": "Injection",
+    "A04": "Insecure Design",
+    "A05": "Security Misconfiguration",
+    "A06": "Vulnerable and Outdated Components",
+    "A07": "Identification and Authentication Failures",
+    "A08": "Software and Data Integrity Failures",
+    "A09": "Security Logging and Monitoring Failures",
+    "A10": "Server-Side Request Forgery (SSRF)"
+  }
+}

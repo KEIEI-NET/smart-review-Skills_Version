@@ -1,0 +1,258 @@
+{
+  "bloaters": {
+    "long_method": {
+      "pattern": "function\\s+\\w+\\s*\\([^)]*\\)\\s*\\{",
+      "threshold": 50,
+      "severity": "medium",
+      "description": "50行を超える長い関数",
+      "recommendation": "関数を小さな関数に分割してください。各関数は1つの責任を持つべきです。",
+      "refactoring": "Extract Method"
+    },
+    "large_class": {
+      "pattern": "class\\s+\\w+",
+      "threshold": 300,
+      "severity": "medium",
+      "description": "300行を超える大きなクラス",
+      "recommendation": "クラスを責任ごとに分割してください。",
+      "refactoring": "Extract Class"
+    },
+    "long_parameter_list": {
+      "pattern": "function\\s+\\w+\\s*\\([^)]{50,}\\)",
+      "threshold": 4,
+      "severity": "low",
+      "description": "引数が多すぎる関数（5個以上）",
+      "recommendation": "引数をオブジェクトにまとめるか、Builder パターンを検討してください。",
+      "refactoring": "Introduce Parameter Object"
+    },
+    "data_clumps": {
+      "description": "常に一緒に現れるデータグループ",
+      "severity": "low",
+      "recommendation": "データをクラスにまとめてください。",
+      "refactoring": "Extract Class"
+    }
+  },
+  "object_orientation_abusers": {
+    "switch_statements": {
+      "pattern": "switch\\s*\\([^)]*\\)\\s*\\{(?:[^}]*case[^:]*:[^}]*){5,}\\}",
+      "threshold": 5,
+      "severity": "medium",
+      "description": "大きなswitch文（5ケース以上）",
+      "recommendation": "ポリモーフィズムを使用するか、戦略パターンを検討してください。",
+      "refactoring": "Replace Conditional with Polymorphism"
+    },
+    "temporary_field": {
+      "description": "特定の状況でのみ使用されるフィールド",
+      "severity": "low",
+      "recommendation": "使用箇所にローカル変数として移動するか、クラスを分割してください。",
+      "refactoring": "Extract Class"
+    },
+    "refused_bequest": {
+      "description": "継承したメソッドやプロパティを使用しない",
+      "severity": "low",
+      "recommendation": "継承ではなくコンポジションを使用してください。",
+      "refactoring": "Replace Inheritance with Delegation"
+    },
+    "alternative_classes_different_interfaces": {
+      "description": "同じことをするが異なるインターフェースを持つクラス",
+      "severity": "medium",
+      "recommendation": "共通のインターフェースを定義してください。",
+      "refactoring": "Extract Interface"
+    }
+  },
+  "change_preventers": {
+    "divergent_change": {
+      "description": "1つのクラスが複数の理由で変更される",
+      "severity": "high",
+      "recommendation": "Single Responsibility Principle に従って、クラスを分割してください。",
+      "refactoring": "Extract Class"
+    },
+    "shotgun_surgery": {
+      "description": "1つの変更で多くのクラスを修正する必要がある",
+      "severity": "high",
+      "recommendation": "関連する振る舞いを1つのクラスにまとめてください。",
+      "refactoring": "Move Method, Move Field"
+    },
+    "parallel_inheritance": {
+      "description": "クラスを追加するたびに、別の階層にもクラスを追加する必要がある",
+      "severity": "medium",
+      "recommendation": "一方の階層を削除し、コンポジションを使用してください。",
+      "refactoring": "Move Method, Move Field"
+    }
+  },
+  "dispensables": {
+    "comments": {
+      "pattern": "\\/\\/.*TODO|FIXME|HACK|XXX",
+      "severity": "low",
+      "description": "TODO/FIXMEコメント",
+      "recommendation": "タスクとして管理し、コメントは削除または対応してください。"
+    },
+    "duplicate_code": {
+      "severity": "high",
+      "description": "重複したコード",
+      "recommendation": "共通のメソッドやクラスに抽出してください。",
+      "refactoring": "Extract Method, Pull Up Method"
+    },
+    "lazy_class": {
+      "description": "ほとんど何もしないクラス",
+      "severity": "low",
+      "recommendation": "クラスを削除し、機能を他のクラスに統合してください。",
+      "refactoring": "Inline Class"
+    },
+    "data_class": {
+      "description": "データのみを持ち、振る舞いを持たないクラス",
+      "severity": "low",
+      "recommendation": "データに関連する振る舞いをクラスに移動してください。",
+      "refactoring": "Move Method"
+    },
+    "dead_code": {
+      "pattern": "function\\s+\\w+.*(?!.*\\w+\\s*\\()",
+      "severity": "medium",
+      "description": "使用されていないコード",
+      "recommendation": "不要なコードは削除してください。",
+      "refactoring": "Remove Dead Code"
+    },
+    "speculative_generality": {
+      "description": "将来の拡張のための不要な複雑性",
+      "severity": "low",
+      "recommendation": "YAGNI（You Aren't Gonna Need It）原則に従い、不要な抽象化を削除してください。",
+      "refactoring": "Inline Class, Remove Parameter"
+    }
+  },
+  "couplers": {
+    "feature_envy": {
+      "description": "他のクラスのデータやメソッドに過度に依存",
+      "severity": "medium",
+      "recommendation": "メソッドを適切なクラスに移動してください。",
+      "refactoring": "Move Method"
+    },
+    "inappropriate_intimacy": {
+      "description": "クラス間が過度に密結合",
+      "severity": "medium",
+      "recommendation": "クラス間の依存関係を減らしてください。",
+      "refactoring": "Move Method, Extract Class"
+    },
+    "message_chains": {
+      "pattern": "\\w+\\.\\w+\\.\\w+\\.\\w+",
+      "severity": "medium",
+      "description": "長いメソッドチェーン（Law of Demeter違反）",
+      "recommendation": "中間オブジェクトに委譲メソッドを追加してください。",
+      "refactoring": "Hide Delegate"
+    },
+    "middle_man": {
+      "description": "単に他のクラスに委譲するだけのクラス",
+      "severity": "low",
+      "recommendation": "中間クラスを削除し、直接通信してください。",
+      "refactoring": "Remove Middle Man"
+    }
+  },
+  "naming_issues": {
+    "inconsistent_naming": {
+      "severity": "low",
+      "description": "命名規則の不統一",
+      "recommendation": "プロジェクト全体で一貫した命名規則を使用してください。"
+    },
+    "unclear_names": {
+      "pattern": "\\b(temp|tmp|data|info|obj|val|var|x|y|z)\\b(?!\\s*[=:]\\s*\\d+)",
+      "severity": "low",
+      "description": "意味不明な変数名",
+      "recommendation": "変数の目的が明確な名前を使用してください。"
+    },
+    "single_letter_names": {
+      "pattern": "\\bconst\\s+[a-z]\\b|\\blet\\s+[a-z]\\b|\\bvar\\s+[a-z]\\b",
+      "severity": "low",
+      "description": "1文字の変数名（ループ変数以外）",
+      "recommendation": "説明的な名前を使用してください。",
+      "exceptions": ["for (let i", "for (let j", "for (let k"]
+    },
+    "hungarian_notation": {
+      "pattern": "\\b(str|int|bool|obj|arr)\\w+",
+      "severity": "low",
+      "description": "ハンガリアン記法の使用",
+      "recommendation": "型情報を含まない、意味のある名前を使用してください。"
+    },
+    "negative_boolean": {
+      "pattern": "\\bis(Not|No|Never)\\w+",
+      "severity": "low",
+      "description": "否定形のboolean名",
+      "recommendation": "肯定形を使用してください（例: isNotValid → isValid）"
+    }
+  },
+  "magic_numbers": {
+    "pattern": "(?<![a-zA-Z_])\\d{2,}(?![a-zA-Z_])",
+    "severity": "low",
+    "description": "マジックナンバー（意味不明な数値リテラル）",
+    "recommendation": "名前付き定数として定義してください。",
+    "exceptions": [0, 1, -1, 2, 10, 100],
+    "refactoring": "Extract Constant"
+  },
+  "primitive_obsession": {
+    "description": "プリミティブ型の過度な使用",
+    "severity": "medium",
+    "recommendation": "ドメイン固有の値オブジェクトを作成してください。",
+    "refactoring": "Replace Data Value with Object"
+  },
+  "god_object": {
+    "description": "すべてを知り、すべてをするクラス",
+    "severity": "high",
+    "recommendation": "責任を複数のクラスに分割してください。",
+    "indicators": {
+      "methods": 30,
+      "lines": 500,
+      "dependencies": 20
+    },
+    "refactoring": "Extract Class, Extract Module"
+  },
+  "code_organization": {
+    "deep_nesting": {
+      "threshold": 4,
+      "severity": "medium",
+      "description": "ネストが深すぎる（4レベル以上）",
+      "recommendation": "早期リターン、Guard Clause、またはメソッド抽出を使用してください。",
+      "refactoring": "Extract Method, Replace Nested Conditional with Guard Clauses"
+    },
+    "long_line": {
+      "threshold": 120,
+      "severity": "low",
+      "description": "長すぎる行（120文字以上）",
+      "recommendation": "行を分割して可読性を向上させてください。"
+    },
+    "multiple_return_points": {
+      "threshold": 5,
+      "severity": "low",
+      "description": "関数内に複数のreturn文（5個以上）",
+      "recommendation": "ロジックを単純化するか、関数を分割してください。"
+    }
+  },
+  "performance_smells": {
+    "inefficient_loop": {
+      "pattern": "for\\s*\\([^)]*\\)\\s*\\{[^}]*for\\s*\\([^)]*\\)",
+      "severity": "medium",
+      "description": "ネストしたループ（O(n²)）",
+      "recommendation": "アルゴリズムを最適化してください。Map、Set、またはハッシュテーブルの使用を検討してください。"
+    },
+    "repeated_computation": {
+      "severity": "low",
+      "description": "ループ内での不変な計算の繰り返し",
+      "recommendation": "計算をループの外に移動してください。",
+      "refactoring": "Extract Variable"
+    }
+  },
+  "testing_smells": {
+    "no_tests": {
+      "severity": "high",
+      "description": "テストがない",
+      "recommendation": "ユニットテストを追加してください。"
+    },
+    "test_only_happy_path": {
+      "severity": "medium",
+      "description": "正常系のテストのみ",
+      "recommendation": "エッジケースとエラーケースのテストを追加してください。"
+    },
+    "large_test": {
+      "threshold": 50,
+      "severity": "low",
+      "description": "長すぎるテスト",
+      "recommendation": "テストを分割してください。"
+    }
+  }
+}

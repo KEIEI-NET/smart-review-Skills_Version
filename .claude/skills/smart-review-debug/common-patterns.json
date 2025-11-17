@@ -1,0 +1,239 @@
+{
+  "null_undefined": [
+    {
+      "pattern": "\\w+\\.\\w+\\.\\w+(?!\\?)",
+      "description": "チェーンされたプロパティアクセスでOptional chaining未使用",
+      "severity": "high",
+      "recommendation": "Optional chaining (?.) を使用してください",
+      "example": "user?.profile?.name"
+    },
+    {
+      "pattern": "\\[\\w+\\](?!\\s*\\?\\?)",
+      "description": "配列アクセスでデフォルト値未設定",
+      "severity": "medium",
+      "recommendation": "Nullish coalescing (??) でデフォルト値を設定してください"
+    },
+    {
+      "pattern": "document\\.getElementById\\([^)]+\\)\\.\\w+",
+      "description": "DOM要素の存在確認なしでプロパティアクセス",
+      "severity": "high",
+      "recommendation": "要素が存在するか確認してください"
+    }
+  ],
+  "type_coercion": [
+    {
+      "pattern": "==\\s*null",
+      "description": "緩い等価演算子でnullチェック",
+      "severity": "medium",
+      "recommendation": "=== を使用するか、意図的に == を使う場合はコメントを追加",
+      "example": "value === null || value === undefined"
+    },
+    {
+      "pattern": "!=\\s*null",
+      "description": "緩い不等価演算子でnullチェック",
+      "severity": "medium",
+      "recommendation": "!== を使用してください"
+    },
+    {
+      "pattern": "==(?!==)",
+      "description": "緩い等価演算子の使用",
+      "severity": "low",
+      "recommendation": "厳密等価演算子 === を使用してください"
+    },
+    {
+      "pattern": "as\\s+any",
+      "description": "TypeScriptでas anyを使用",
+      "severity": "medium",
+      "recommendation": "適切な型定義を使用してください"
+    }
+  ],
+  "async_await": [
+    {
+      "pattern": "async\\s+function[^{]*\\{[^}]*(?<!await\\s)\\w+\\s*\\([^)]*\\)(?!.*await)",
+      "description": "async関数内でawaitを使用していない可能性",
+      "severity": "high",
+      "recommendation": "非同期関数呼び出しには await を使用してください"
+    },
+    {
+      "pattern": "\\.then\\s*\\([^)]*\\)(?!.*\\.catch)",
+      "description": "Promiseチェーンでcatchがない",
+      "severity": "high",
+      "recommendation": ".catch() でエラーハンドリングを追加してください"
+    },
+    {
+      "pattern": "new\\s+Promise\\s*\\([^)]*\\)(?!.*\\.catch)",
+      "description": "Promise作成後のエラーハンドリング不足",
+      "severity": "high",
+      "recommendation": ".catch() を追加するか、try-catchで囲んでください"
+    },
+    {
+      "pattern": "Promise\\.all\\s*\\([^)]*\\)(?!.*catch)",
+      "description": "Promise.allでエラーハンドリングなし",
+      "severity": "high",
+      "recommendation": ".catch() または try-catch を追加してください"
+    }
+  ],
+  "error_handling": [
+    {
+      "pattern": "catch\\s*\\(\\w*\\)\\s*\\{\\s*\\}",
+      "description": "空のcatchブロック - エラーを無視",
+      "severity": "high",
+      "recommendation": "エラーをログに記録するか、適切に処理してください",
+      "example": "catch (error) { logger.error(error); throw error; }"
+    },
+    {
+      "pattern": "catch\\s*\\(\\w*\\)\\s*\\{[^}]*console\\.log",
+      "description": "catchブロック内でconsole.logのみ",
+      "severity": "medium",
+      "recommendation": "適切なロガーを使用し、エラーを再スローまたは処理してください"
+    },
+    {
+      "pattern": "try\\s*\\{[^}]*\\}\\s*catch",
+      "description": "tryブロックがあるがfinallyがない（リソース管理の確認）",
+      "severity": "low",
+      "recommendation": "リソース解放が必要な場合はfinallyブロックを追加してください"
+    },
+    {
+      "pattern": "throw\\s+['\"`]",
+      "description": "文字列を直接throw",
+      "severity": "medium",
+      "recommendation": "Error オブジェクトを throw してください",
+      "example": "throw new Error('message')"
+    }
+  ],
+  "logic_errors": [
+    {
+      "pattern": "if\\s*\\([^)]*=[^=]",
+      "description": "if文内で代入演算子を使用",
+      "severity": "high",
+      "recommendation": "比較演算子 === を使用してください"
+    },
+    {
+      "pattern": "switch\\s*\\([^)]*\\)\\s*\\{(?!.*default)",
+      "description": "switch文にdefaultケースがない",
+      "severity": "medium",
+      "recommendation": "default ケースを追加してください"
+    },
+    {
+      "pattern": "for\\s*\\([^)]*<=\\s*\\w+\\.length",
+      "description": "ループでoff-by-oneエラーの可能性",
+      "severity": "high",
+      "recommendation": "< を使用してください（配列のインデックスは0始まり）"
+    },
+    {
+      "pattern": "while\\s*\\(true\\)(?!.*break)",
+      "description": "無限ループの可能性（breakがない）",
+      "severity": "high",
+      "recommendation": "終了条件を追加してください"
+    },
+    {
+      "pattern": "else\\s+if\\s*\\([^)]*\\)(?!.*else)",
+      "description": "else ifの連鎖で最終elseがない",
+      "severity": "low",
+      "recommendation": "すべてのケースをカバーするため else を追加してください"
+    }
+  ],
+  "memory_leaks": [
+    {
+      "pattern": "addEventListener\\s*\\([^)]*\\)(?!.*removeEventListener)",
+      "description": "イベントリスナーの登録後、解除コードが見当たらない",
+      "severity": "medium",
+      "recommendation": "removeEventListener でクリーンアップしてください"
+    },
+    {
+      "pattern": "setInterval\\s*\\([^)]*\\)(?!.*clearInterval)",
+      "description": "setIntervalの後にclearIntervalがない",
+      "severity": "medium",
+      "recommendation": "clearInterval でタイマーをクリアしてください"
+    },
+    {
+      "pattern": "setTimeout\\s*\\([^)]*\\)(?!.*clearTimeout)",
+      "description": "setTimeoutの後にclearTimeoutがない",
+      "severity": "low",
+      "recommendation": "必要に応じて clearTimeout を追加してください"
+    },
+    {
+      "pattern": "var\\s+\\w+\\s*=",
+      "description": "var の使用（グローバルスコープ汚染のリスク）",
+      "severity": "low",
+      "recommendation": "let または const を使用してください"
+    }
+  ],
+  "edge_cases": [
+    {
+      "pattern": "if\\s*\\(\\w+\\.length\\)(?!\\s*>)",
+      "description": "length のみでチェック（0の扱いに注意）",
+      "severity": "low",
+      "recommendation": "明示的に > 0 と比較してください"
+    },
+    {
+      "pattern": "parseInt\\s*\\([^)]*\\)(?!.*,\\s*10)",
+      "description": "parseIntで基数を指定していない",
+      "severity": "medium",
+      "recommendation": "parseInt(value, 10) のように基数を指定してください"
+    },
+    {
+      "pattern": "JSON\\.parse\\s*\\([^)]*\\)(?!.*try)",
+      "description": "JSON.parseをtry-catchで囲んでいない",
+      "severity": "high",
+      "recommendation": "不正なJSONに対応するためtry-catchを使用してください"
+    },
+    {
+      "pattern": "\\w+\\.map\\s*\\([^)]*\\)(?!.*return)",
+      "description": "map内でreturnがない可能性",
+      "severity": "high",
+      "recommendation": "map関数内で値をreturnしてください"
+    }
+  ],
+  "race_conditions": [
+    {
+      "pattern": "let\\s+\\w+\\s*=\\s*\\w+;[^}]*await[^}]*\\1\\s*=",
+      "description": "非同期処理中の変数更新（レースコンディションの可能性）",
+      "severity": "high",
+      "recommendation": "変数の状態管理を見直してください"
+    }
+  ],
+  "data_validation": [
+    {
+      "pattern": "req\\.(body|query|params)\\[\\w+\\](?!.*validate)",
+      "description": "リクエストパラメータの検証なし",
+      "severity": "high",
+      "recommendation": "入力値を検証してください"
+    },
+    {
+      "pattern": "Number\\s*\\([^)]*\\)(?!.*isNaN)",
+      "description": "Number()の結果をNaNチェックしていない",
+      "severity": "medium",
+      "recommendation": "isNaN() または Number.isNaN() でチェックしてください"
+    }
+  ],
+  "react_specific": [
+    {
+      "pattern": "useEffect\\s*\\([^)]*\\)(?!.*,\\s*\\[)",
+      "description": "useEffectで依存配列が指定されていない",
+      "severity": "high",
+      "recommendation": "依存配列を指定してください"
+    },
+    {
+      "pattern": "useState\\s*\\([^)]*\\);[^}]*\\w+\\s*\\([^)]*\\);[^}]*\\1\\s*\\(",
+      "description": "状態更新の直後に状態を使用（非同期更新に注意）",
+      "severity": "medium",
+      "recommendation": "状態更新は非同期なので、useEffectで監視してください"
+    }
+  ],
+  "performance": [
+    {
+      "pattern": "for\\s*\\([^)]*\\)\\s*\\{[^}]*for\\s*\\(",
+      "description": "ネストしたループ（パフォーマンス懸念）",
+      "severity": "low",
+      "recommendation": "計算量を確認し、必要に応じて最適化してください"
+    },
+    {
+      "pattern": "\\w+\\.forEach\\s*\\([^)]*await",
+      "description": "forEach内でawaitを使用（逐次実行）",
+      "severity": "medium",
+      "recommendation": "Promise.all と map を使用して並列実行してください",
+      "example": "await Promise.all(items.map(async (item) => ...))"
+    }
+  ]
+}

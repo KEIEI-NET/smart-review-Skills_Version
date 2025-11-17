@@ -1,0 +1,330 @@
+{
+  "complexity": {
+    "cyclomatic": {
+      "excellent": {
+        "max": 5,
+        "description": "非常にシンプルで理解しやすい"
+      },
+      "good": {
+        "min": 6,
+        "max": 10,
+        "description": "シンプルで保守しやすい"
+      },
+      "fair": {
+        "min": 11,
+        "max": 20,
+        "description": "やや複雑、リファクタリングを検討"
+      },
+      "poor": {
+        "min": 21,
+        "max": 50,
+        "description": "複雑、リファクタリング推奨"
+      },
+      "critical": {
+        "min": 51,
+        "description": "非常に複雑、即座にリファクタリング必要"
+      }
+    },
+    "nesting": {
+      "recommended": 3,
+      "max_acceptable": 4,
+      "description": "ネストの深さ。4以上は可読性が低下"
+    },
+    "cognitive": {
+      "low": {
+        "max": 10,
+        "description": "認知的複雑度が低い"
+      },
+      "medium": {
+        "min": 11,
+        "max": 20,
+        "description": "中程度の認知的複雑度"
+      },
+      "high": {
+        "min": 21,
+        "description": "高い認知的複雑度、理解困難"
+      }
+    }
+  },
+  "size": {
+    "function": {
+      "excellent": {
+        "max": 20,
+        "description": "非常に簡潔"
+      },
+      "good": {
+        "min": 21,
+        "max": 50,
+        "description": "適切なサイズ"
+      },
+      "fair": {
+        "min": 51,
+        "max": 100,
+        "description": "やや長い、分割を検討"
+      },
+      "poor": {
+        "min": 101,
+        "max": 200,
+        "description": "長すぎる、分割推奨"
+      },
+      "critical": {
+        "min": 201,
+        "description": "非常に長い、即座に分割必要"
+      }
+    },
+    "class": {
+      "excellent": {
+        "max": 100,
+        "description": "コンパクトなクラス"
+      },
+      "good": {
+        "min": 101,
+        "max": 300,
+        "description": "適切なサイズ"
+      },
+      "fair": {
+        "min": 301,
+        "max": 500,
+        "description": "やや大きい、責任の分離を検討"
+      },
+      "poor": {
+        "min": 501,
+        "max": 1000,
+        "description": "大きすぎる、分割推奨"
+      },
+      "critical": {
+        "min": 1001,
+        "description": "非常に大きい、即座に分割必要"
+      }
+    },
+    "file": {
+      "recommended": 300,
+      "max_acceptable": 500,
+      "critical": 1000,
+      "description": "ファイルの行数。500行以上は分割を検討"
+    },
+    "module": {
+      "recommended": 5,
+      "max_acceptable": 10,
+      "description": "モジュール内のエクスポート数"
+    }
+  },
+  "parameters": {
+    "function": {
+      "ideal": 2,
+      "good": 3,
+      "acceptable": 4,
+      "refactor_needed": 5,
+      "description": "関数の引数の数。3つ以下が理想、5つ以上は要リファクタリング"
+    },
+    "constructor": {
+      "ideal": 3,
+      "good": 5,
+      "acceptable": 7,
+      "description": "コンストラクタの引数数"
+    }
+  },
+  "methods": {
+    "per_class": {
+      "excellent": {
+        "max": 10,
+        "description": "コンパクトなクラス"
+      },
+      "good": {
+        "min": 11,
+        "max": 20,
+        "description": "適切なメソッド数"
+      },
+      "fair": {
+        "min": 21,
+        "max": 30,
+        "description": "やや多い"
+      },
+      "poor": {
+        "min": 31,
+        "description": "多すぎる、責任の分離を検討"
+      }
+    },
+    "public_vs_private": {
+      "ideal_ratio": 0.3,
+      "description": "public/total の理想比率。小さいほど良いカプセル化"
+    }
+  },
+  "cohesion": {
+    "lcom": {
+      "excellent": {
+        "max": 0.2,
+        "description": "高い凝集度"
+      },
+      "good": {
+        "min": 0.21,
+        "max": 0.5,
+        "description": "適切な凝集度"
+      },
+      "poor": {
+        "min": 0.51,
+        "description": "低い凝集度、クラス分割を検討"
+      }
+    },
+    "description": "LCOM (Lack of Cohesion of Methods) - 値が低いほど凝集度が高い"
+  },
+  "coupling": {
+    "afferent": {
+      "description": "このモジュールに依存している他のモジュール数",
+      "high_threshold": 10
+    },
+    "efferent": {
+      "description": "このモジュールが依存している他のモジュール数",
+      "high_threshold": 10
+    },
+    "instability": {
+      "stable": {
+        "max": 0.3,
+        "description": "安定したモジュール（変更されにくい）"
+      },
+      "balanced": {
+        "min": 0.31,
+        "max": 0.7,
+        "description": "バランスの取れた安定性"
+      },
+      "unstable": {
+        "min": 0.71,
+        "description": "不安定なモジュール（変更されやすい）"
+      }
+    }
+  },
+  "duplication": {
+    "code": {
+      "excellent": {
+        "max": 1,
+        "description": "ほぼ重複なし"
+      },
+      "good": {
+        "min": 1.1,
+        "max": 3,
+        "description": "許容範囲の重複"
+      },
+      "fair": {
+        "min": 3.1,
+        "max": 5,
+        "description": "やや多い重複"
+      },
+      "poor": {
+        "min": 5.1,
+        "max": 10,
+        "description": "重複が多い"
+      },
+      "critical": {
+        "min": 10.1,
+        "description": "重複が非常に多い、DRY原則違反"
+      }
+    },
+    "min_lines": 6,
+    "description": "重複コードの許容パーセンテージ"
+  },
+  "comments": {
+    "ratio": {
+      "minimal": {
+        "max": 10,
+        "description": "コメントが少なすぎる"
+      },
+      "good": {
+        "min": 10,
+        "max": 30,
+        "description": "適切なコメント量"
+      },
+      "excessive": {
+        "min": 30,
+        "description": "コメントが多すぎる、自己文書化コードを検討"
+      }
+    },
+    "description": "コメント行 / 総行数 のパーセンテージ"
+  },
+  "naming": {
+    "variable": {
+      "min_length": 3,
+      "max_length": 30,
+      "exceptions": ["i", "j", "k", "x", "y", "z"],
+      "description": "変数名の長さ（ループ変数を除く）"
+    },
+    "function": {
+      "min_length": 3,
+      "max_length": 40,
+      "description": "関数名の長さ"
+    },
+    "class": {
+      "min_length": 3,
+      "max_length": 40,
+      "description": "クラス名の長さ"
+    },
+    "patterns": {
+      "boolean_prefix": ["is", "has", "can", "should", "will"],
+      "function_verbs": ["get", "set", "create", "update", "delete", "fetch", "send", "calculate", "validate", "process", "handle", "build", "parse", "format"],
+      "class_nouns": true
+    }
+  },
+  "maintainability": {
+    "index": {
+      "excellent": {
+        "min": 80,
+        "description": "非常に保守しやすい"
+      },
+      "good": {
+        "min": 60,
+        "max": 79,
+        "description": "保守しやすい"
+      },
+      "fair": {
+        "min": 40,
+        "max": 59,
+        "description": "やや保守しにくい"
+      },
+      "poor": {
+        "min": 20,
+        "max": 39,
+        "description": "保守しにくい"
+      },
+      "critical": {
+        "max": 19,
+        "description": "非常に保守しにくい"
+      }
+    },
+    "description": "Maintainability Index (0-100)。高いほど保守しやすい"
+  },
+  "test_coverage": {
+    "excellent": {
+      "min": 80,
+      "description": "非常に良いカバレッジ"
+    },
+    "good": {
+      "min": 60,
+      "max": 79,
+      "description": "良いカバレッジ"
+    },
+    "fair": {
+      "min": 40,
+      "max": 59,
+      "description": "改善の余地あり"
+    },
+    "poor": {
+      "min": 20,
+      "max": 39,
+      "description": "カバレッジ不足"
+    },
+    "critical": {
+      "max": 19,
+      "description": "カバレッジが非常に低い"
+    }
+  },
+  "scoring": {
+    "weights": {
+      "complexity": 30,
+      "size": 20,
+      "duplication": 15,
+      "naming": 10,
+      "cohesion": 15,
+      "coupling": 10
+    },
+    "description": "品質スコア計算の重み付け（合計100%）"
+  }
+}

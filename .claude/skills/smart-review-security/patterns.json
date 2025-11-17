@@ -1,0 +1,304 @@
+{
+  "xss": [
+    {
+      "pattern": "innerHTML\\s*=\\s*(?!\\s*['\"`])",
+      "description": "innerHTML への直接代入",
+      "severity": "high",
+      "cwe": "CWE-79",
+      "recommendation": "textContent を使用するか、DOMPurify でサニタイズしてください",
+      "example": "element.textContent = userInput; // または DOMPurify.sanitize(userInput)"
+    },
+    {
+      "pattern": "outerHTML\\s*=",
+      "description": "outerHTML への直接代入",
+      "severity": "high",
+      "cwe": "CWE-79",
+      "recommendation": "textContent を使用するか適切にエスケープしてください"
+    },
+    {
+      "pattern": "dangerouslySetInnerHTML",
+      "description": "React の dangerouslySetInnerHTML 使用",
+      "severity": "high",
+      "cwe": "CWE-79",
+      "recommendation": "DOMPurify でサニタイズするか、安全な方法でレンダリングしてください"
+    },
+    {
+      "pattern": "document\\.write\\s*\\(",
+      "description": "document.write の使用",
+      "severity": "medium",
+      "cwe": "CWE-79",
+      "recommendation": "DOM API を使用してください"
+    },
+    {
+      "pattern": "eval\\s*\\(",
+      "description": "eval() の使用",
+      "severity": "critical",
+      "cwe": "CWE-95",
+      "recommendation": "eval() を使わずに、JSON.parse() や他の安全な方法を使用してください"
+    },
+    {
+      "pattern": "setTimeout\\s*\\(\\s*['\"`]",
+      "description": "setTimeout への文字列渡し",
+      "severity": "medium",
+      "cwe": "CWE-95",
+      "recommendation": "setTimeout に関数を渡してください"
+    },
+    {
+      "pattern": "setInterval\\s*\\(\\s*['\"`]",
+      "description": "setInterval への文字列渡し",
+      "severity": "medium",
+      "cwe": "CWE-95",
+      "recommendation": "setInterval に関数を渡してください"
+    }
+  ],
+  "sqli": [
+    {
+      "pattern": "SELECT.*\\+.*\\+",
+      "description": "文字列連結によるSQLクエリ構築",
+      "severity": "critical",
+      "cwe": "CWE-89",
+      "recommendation": "プリペアドステートメントを使用してください",
+      "example": "db.query('SELECT * FROM users WHERE id = ?', [userId])"
+    },
+    {
+      "pattern": "INSERT.*\\+.*\\+",
+      "description": "文字列連結によるINSERTクエリ構築",
+      "severity": "critical",
+      "cwe": "CWE-89",
+      "recommendation": "プリペアドステートメントを使用してください"
+    },
+    {
+      "pattern": "UPDATE.*\\+.*\\+",
+      "description": "文字列連結によるUPDATEクエリ構築",
+      "severity": "critical",
+      "cwe": "CWE-89",
+      "recommendation": "プリペアドステートメントを使用してください"
+    },
+    {
+      "pattern": "DELETE.*\\+.*\\+",
+      "description": "文字列連結によるDELETEクエリ構築",
+      "severity": "critical",
+      "cwe": "CWE-89",
+      "recommendation": "プリペアドステートメントを使用してください"
+    },
+    {
+      "pattern": "\\.raw\\s*\\(",
+      "description": "ORMの raw query 使用",
+      "severity": "high",
+      "cwe": "CWE-89",
+      "recommendation": "ORM の安全なクエリビルダーを使用してください"
+    },
+    {
+      "pattern": "\\$\\{.*\\}.*SELECT",
+      "description": "テンプレートリテラルによるSQLクエリ構築",
+      "severity": "critical",
+      "cwe": "CWE-89",
+      "recommendation": "プリペアドステートメントを使用してください"
+    }
+  ],
+  "command_injection": [
+    {
+      "pattern": "exec\\s*\\(.*\\$",
+      "description": "変数を含むコマンド実行",
+      "severity": "critical",
+      "cwe": "CWE-78",
+      "recommendation": "spawn を使用し、引数を配列で渡してください",
+      "example": "spawn('ls', [userInput]) の形式を使用"
+    },
+    {
+      "pattern": "execSync\\s*\\(.*\\$",
+      "description": "変数を含む同期コマンド実行",
+      "severity": "critical",
+      "cwe": "CWE-78",
+      "recommendation": "spawnSync を使用し、引数を配列で渡してください"
+    },
+    {
+      "pattern": "shell:\\s*true",
+      "description": "spawn/exec で shell オプション使用",
+      "severity": "high",
+      "cwe": "CWE-78",
+      "recommendation": "shell オプションを使わず、引数を配列で渡してください"
+    },
+    {
+      "pattern": "system\\s*\\(",
+      "description": "system() 関数の使用",
+      "severity": "critical",
+      "cwe": "CWE-78",
+      "recommendation": "安全なコマンド実行方法を使用してください"
+    },
+    {
+      "pattern": "os\\.popen",
+      "description": "os.popen の使用（Python）",
+      "severity": "critical",
+      "cwe": "CWE-78",
+      "recommendation": "subprocess.run を使用してください"
+    }
+  ],
+  "authentication": [
+    {
+      "pattern": "jwt\\.decode\\s*\\([^,]*\\)",
+      "description": "JWT の署名検証なしデコード",
+      "severity": "high",
+      "cwe": "CWE-347",
+      "recommendation": "jwt.verify を使用して署名を検証してください"
+    },
+    {
+      "pattern": "session\\.cookie\\.secure\\s*=\\s*false",
+      "description": "セキュアでないセッションCookie",
+      "severity": "high",
+      "cwe": "CWE-614",
+      "recommendation": "secure: true を設定してください"
+    },
+    {
+      "pattern": "httpOnly\\s*:\\s*false",
+      "description": "HttpOnly フラグが無効",
+      "severity": "medium",
+      "cwe": "CWE-1004",
+      "recommendation": "httpOnly: true を設定してください"
+    },
+    {
+      "pattern": "sameSite\\s*:\\s*['\"`]none['\"`]",
+      "description": "SameSite=None の使用",
+      "severity": "medium",
+      "cwe": "CWE-352",
+      "recommendation": "SameSite=Strict または Lax を使用してください"
+    },
+    {
+      "pattern": "bcrypt\\.compare\\s*\\([^)]*\\)\\s*&&\\s*!",
+      "description": "パスワード比較ロジックの潜在的な問題",
+      "severity": "medium",
+      "cwe": "CWE-287",
+      "recommendation": "パスワード検証ロジックを慎重に確認してください"
+    }
+  ],
+  "secrets": [
+    {
+      "pattern": "['\"`](password|passwd|pwd)['\"`]\\s*:\\s*['\"`][^'\"]{3,}['\"`]",
+      "description": "ハードコードされたパスワード",
+      "severity": "critical",
+      "cwe": "CWE-798",
+      "recommendation": "環境変数を使用してください",
+      "example": "const password = process.env.DB_PASSWORD"
+    },
+    {
+      "pattern": "['\"`](api[_-]?key|apikey)['\"`]\\s*:\\s*['\"`][^'\"]{10,}['\"`]",
+      "description": "ハードコードされたAPIキー",
+      "severity": "critical",
+      "cwe": "CWE-798",
+      "recommendation": "環境変数を使用してください"
+    },
+    {
+      "pattern": "['\"`](secret|token)['\"`]\\s*:\\s*['\"`][^'\"]{10,}['\"`]",
+      "description": "ハードコードされたシークレット",
+      "severity": "critical",
+      "cwe": "CWE-798",
+      "recommendation": "環境変数を使用してください"
+    },
+    {
+      "pattern": "sk-[a-zA-Z0-9]{20,}",
+      "description": "OpenAI API キーのハードコード",
+      "severity": "critical",
+      "cwe": "CWE-798",
+      "recommendation": "環境変数を使用してください"
+    },
+    {
+      "pattern": "AIza[0-9A-Za-z\\-_]{35}",
+      "description": "Google API キーのハードコード",
+      "severity": "critical",
+      "cwe": "CWE-798",
+      "recommendation": "環境変数を使用してください"
+    },
+    {
+      "pattern": "console\\.log\\s*\\(.*password",
+      "description": "パスワードをログ出力",
+      "severity": "high",
+      "cwe": "CWE-532",
+      "recommendation": "機密情報をログに出力しないでください"
+    },
+    {
+      "pattern": "console\\.log\\s*\\(.*token",
+      "description": "トークンをログ出力",
+      "severity": "high",
+      "cwe": "CWE-532",
+      "recommendation": "機密情報をログに出力しないでください"
+    }
+  ],
+  "crypto": [
+    {
+      "pattern": "createHash\\s*\\(['\"`]md5['\"`]\\)",
+      "description": "MD5 ハッシュの使用",
+      "severity": "high",
+      "cwe": "CWE-327",
+      "recommendation": "SHA-256 以上の強力なハッシュアルゴリズムを使用してください"
+    },
+    {
+      "pattern": "createHash\\s*\\(['\"`]sha1['\"`]\\)",
+      "description": "SHA-1 ハッシュの使用",
+      "severity": "medium",
+      "cwe": "CWE-327",
+      "recommendation": "SHA-256 以上を使用してください"
+    },
+    {
+      "pattern": "Math\\.random\\s*\\(\\)",
+      "description": "Math.random() の使用（暗号用途不可）",
+      "severity": "medium",
+      "cwe": "CWE-338",
+      "recommendation": "crypto.randomBytes() を使用してください"
+    },
+    {
+      "pattern": "crypto\\.createCipher\\s*\\(",
+      "description": "非推奨の createCipher 使用",
+      "severity": "high",
+      "cwe": "CWE-327",
+      "recommendation": "createCipheriv を使用してください"
+    }
+  ],
+  "path_traversal": [
+    {
+      "pattern": "readFile\\s*\\(.*\\+",
+      "description": "ユーザー入力を使用したファイルパス構築",
+      "severity": "high",
+      "cwe": "CWE-22",
+      "recommendation": "path.join() と path.normalize() を使用し、ベースディレクトリを検証してください"
+    },
+    {
+      "pattern": "\\.\\.\\/",
+      "description": "相対パスの使用",
+      "severity": "medium",
+      "cwe": "CWE-22",
+      "recommendation": "パスを正規化し、許可されたディレクトリ内か検証してください"
+    },
+    {
+      "pattern": "sendFile\\s*\\(.*\\+",
+      "description": "動的ファイルパスでのファイル送信",
+      "severity": "high",
+      "cwe": "CWE-22",
+      "recommendation": "パスを検証し、ホワイトリストを使用してください"
+    }
+  ],
+  "xxe": [
+    {
+      "pattern": "parseXml\\s*\\([^)]*\\)",
+      "description": "XML パース（XXE 脆弱性の可能性）",
+      "severity": "high",
+      "cwe": "CWE-611",
+      "recommendation": "外部エンティティを無効化してください"
+    }
+  ],
+  "cors": [
+    {
+      "pattern": "Access-Control-Allow-Origin.*\\*",
+      "description": "CORS で全オリジンを許可",
+      "severity": "medium",
+      "cwe": "CWE-942",
+      "recommendation": "特定のオリジンのみを許可してください"
+    },
+    {
+      "pattern": "cors\\s*\\(\\s*\\{\\s*origin\\s*:\\s*true",
+      "description": "CORS で全オリジンを反映",
+      "severity": "medium",
+      "cwe": "CWE-942",
+      "recommendation": "ホワイトリストを使用してください"
+    }
+  ]
+}

@@ -220,6 +220,44 @@ claude
 
 正常にインストールされている場合、`smart-review-security` Skillが自動的に起動します。
 
+### 2-2. インストールされているSkillsの一覧を確認
+
+**方法1: 自然文で尋ねる（推奨）**
+
+Claude Code内で以下のように尋ねると、利用可能なSkillsが表示されます：
+
+```bash
+claude
+
+# プロンプトで尋ねる
+> 利用可能なスキルを教えて
+> List all available Skills
+```
+
+**方法2: ファイルシステムで確認**
+
+```bash
+# グローバルインストールの場合
+ls -1 ~/.claude/skills/
+# または Windows (Git Bash)
+ls -1 /c/Users/YOUR_USERNAME/.claude/skills/
+
+# プロジェクトローカルインストールの場合
+ls -1 .claude/skills/
+```
+
+**方法3: 各Skillの詳細を確認**
+
+```bash
+# 特定のSkillの詳細情報を表示
+cat ~/.claude/skills/smart-review-security/SKILL.md | head -n 5
+
+# すべてのSkillsの説明を一覧表示
+head -n 3 ~/.claude/skills/*/SKILL.md
+```
+
+**補足**: `claude skills list` というコマンドは存在しません。Skillsは自動的に読み込まれ、descriptionに基づいて適切なタイミングで起動します。
+
 ### 3. テストサンプルで確認（オプション）
 
 ```bash
@@ -357,34 +395,65 @@ Get-Content .claude\skills\smart-review-security\patterns.json | ConvertFrom-Jso
 
 **解決策**:
 
-**オプションA: グローバルインストール（非推奨）**
+**オプションA: グローバルインストール（推奨）**
 
-Claude Code CLIは現在、グローバルSkillsをサポートしていません。各プロジェクトごとにインストールが必要です。
+Claude Code CLIは `~/.claude/skills` ディレクトリを使用したグローバルSkillsを公式にサポートしています。このディレクトリにインストールすると、すべてのプロジェクトで自動的に利用可能になります。
 
-**オプションB: シンボリックリンクを使用**
+```bash
+# グローバルディレクトリを作成
+mkdir -p ~/.claude/skills
+
+# Smart Review Skillsをコピー
+cp -r /path/to/smart-review-system/.claude/skills/* ~/.claude/skills/
+
+# 確認
+ls -la ~/.claude/skills/
+```
+
+これで、どのプロジェクトでもClaude Codeを起動するだけで使用できます。
+
+**オプションB: プロジェクト固有のインストール**
+
+特定のプロジェクトにのみインストールしたい場合は、各プロジェクトでインストールスクリプトを実行してください。
+
+```bash
+cd /path/to/your/project
+./install.sh  # または install.ps1
+```
+
+**オプションC: シンボリックリンクを使用（代替方法）**
+
+カスタムディレクトリから参照したい場合：
 
 ```bash
 # 共通の場所にインストール
-mkdir -p ~/claude-skills
-cp -r /path/to/smart-review-system/.claude/skills/* ~/claude-skills/
+mkdir -p ~/my-custom-skills
+cp -r /path/to/smart-review-system/.claude/skills/* ~/my-custom-skills/
 
 # 各プロジェクトでシンボリックリンクを作成
 cd /path/to/project1
 mkdir -p .claude/skills
-ln -s ~/claude-skills/* .claude/skills/
-
-cd /path/to/project2
-mkdir -p .claude/skills
-ln -s ~/claude-skills/* .claude/skills/
+ln -s ~/my-custom-skills/* .claude/skills/
 ```
 
-**オプションC: インストールスクリプトを各プロジェクトで実行**
-
-最も確実な方法です。
+**推奨:** ほとんどの場合、オプションA（グローバルインストール）が最適です。
 
 ### Q6. アップデート方法
 
-**手動インストールの場合**:
+**グローバルインストールの場合（推奨）**:
+
+```bash
+# 最新版をダウンロード
+cd /path/to/smart-review-system
+git pull origin main
+
+# グローバルディレクトリに上書きコピー
+cp -r .claude/skills/* ~/.claude/skills/
+```
+
+すべてのプロジェクトに即座に反映されます。
+
+**プロジェクト固有のインストールの場合**:
 
 1. 最新版をダウンロード
 2. 既存のSkillsを削除

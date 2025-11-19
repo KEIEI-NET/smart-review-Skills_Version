@@ -24,6 +24,22 @@
 
 ### インストール
 
+**推奨: グローバルインストール（すべてのプロジェクトで使用可能）**
+
+```bash
+# macOS / Linux
+mkdir -p ~/.claude/skills
+cd /path/to/smart-review-system
+cp -r .claude/skills/* ~/.claude/skills/
+
+# Windows (PowerShell)
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude\skills" -Force
+cd path\to\smart-review-system
+Copy-Item -Path ".claude\skills\*" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse -Force
+```
+
+**代替: プロジェクト固有のインストール**
+
 #### Windows (PowerShell)
 
 ```powershell

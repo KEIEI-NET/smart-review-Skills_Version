@@ -89,6 +89,20 @@ temp/
 # Claude Code 関連（プロジェクト固有の設定を除く）
 .claude-cache/
 
+# 機密ドキュメント（セキュリティ関連のみ）
 docs_sec/
 CLAUDE_sec.md
-docs/*.md
+docs/*-secret.md
+docs/*-private.md
+
+# 公開ドキュメントは除外しない（計画・設計文書はコミット対象）
+# docs/*.md を削除 - 以下のファイルをコミット可能にする:
+#   - ast-analysis-implementation-plan.md
+#   - rule-expansion-plan.md
+#   - github-actions-integration-plan.md
+#   - subagents-vs-skills-comparison.md
+#   - smart-review-implementation-plan.md
+#   - smart-review-subagent-approach.md
+
+./*.zip
+*.zip

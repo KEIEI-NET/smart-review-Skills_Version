@@ -4,7 +4,41 @@
 
 ## 📦 インストール
 
-### Windows
+### 推奨: グローバルインストール
+
+すべてのプロジェクトで使用可能になります。
+
+#### macOS / Linux
+
+```bash
+# グローバルディレクトリを作成
+mkdir -p ~/.claude/skills
+
+# プロジェクトをクローン
+git clone https://github.com/KEIEI-NET/smart-review-Skills_Version.git
+cd smart-review-Skills_Version
+
+# Skillsをコピー
+cp -r .claude/skills/* ~/.claude/skills/
+```
+
+#### Windows (PowerShell)
+
+```powershell
+# グローバルディレクトリを作成
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.claude\skills" -Force
+
+# プロジェクトをクローン
+git clone https://github.com/KEIEI-NET/smart-review-Skills_Version.git
+cd smart-review-Skills_Version
+
+# Skillsをコピー
+Copy-Item -Path ".claude\skills\*" -Destination "$env:USERPROFILE\.claude\skills\" -Recurse -Force
+```
+
+### 代替: プロジェクト固有のインストール
+
+#### Windows
 
 ```powershell
 # PowerShellを管理者権限で起動
@@ -17,7 +51,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/KEIEI-NET/smart-review
 .\install.ps1
 ```
 
-### macOS / Linux
+#### macOS / Linux
 
 ```bash
 cd /path/to/your/project
